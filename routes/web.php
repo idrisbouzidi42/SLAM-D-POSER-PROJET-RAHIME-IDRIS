@@ -1,0 +1,93 @@
+<?php
+
+use App\User;
+use App\Offre;
+use App\Competence;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+
+
+Route::get('/', function () {
+    return view('acceuil');
+});
+
+//Admin
+Route::get('/admin', 'Admin\AdminController@indexAdmin')->name('admin');
+Route::get('/admin/profile/{user}', 'Admin\AdminController@profile');
+//Changer l'email
+Route::get('/admin/profile/{user}/edit', 'Admin\AdminController@editProfil');
+Route::patch('/admin/profile/{user}', 'Admin\AdminController@UpdateEmail');
+Route::get('/admin/password/reset/{user}', 'Admin\AdminController@resetPassForm')->name('PassResetForm');
+Route::patch('/admin/password/reset/{user}', 'Admin\AdminController@updatePass')->name('UpdatePass');
+
+Route::get('/admin/competences', 'Admin\AdminController@competences')->name('competences');
+Route::post('/admin/AjouterCompetence','Admin\AdminController@createCompetence')->name('competences');
+Route::get('/admin/competences/edit','Admin\AdminController@editCompetence')->name('competences');
+Route::patch('/admin/competences/{comp}','Admin\AdminController@updateCompetence')->name('competences');
+Route::delete('/admin/competences/{comp}', 'Admin\AdminController@destroyCompetence');
+
+Route::get('/admin/signal/offres/{offre}','Admin\AdminController@signalOffre');
+Route::get('/admin/unsignal/offres/{offre}','Admin\AdminController@unsignalOffre');
+Route::delete('/admin/offres/{offre}', 'Admin\AdminController@destroyOffre');
+
+Route::get('/admin/signal/demandes/{demande}','Admin\AdminController@signalDemande');
+Route::get('/admin/unsignal/demandes/{demande}','Admin\AdminController@unsignalDemande');
+Route::delete('/admin/demandes/{demande}', 'Admin\AdminController@destroyDemande');
+
+//Search
+Route::post('/search/offres', 'SearchController@searchOffre');
+Route::post('/search/demandes', 'SearchController@searchDemande');
+Route::post('/search/all', 'SearchController@searchAll');
+Route::get('/search/{query}', 'SearchController@searchCompetence');
+
+//Contact
+Route::get('/contact', 'ContactController@create');
+Route::post('/contact', 'ContactController@store');
+
+//Offre
+Route::get('/offres/index', 'OffreController@index');
+Route::get('/offres/create', 'OffreController@create');
+Route::post('/offres/create', 'OffreController@store');
+Route::get('/offres/{offre}', 'OffreController@show');
+Route::get('/offres/{offre}/edit', 'OffreController@edit');
+Route::patch('/offres/{offre}', 'OffreController@update');
+Route::delete('/offres/{offre}', 'OffreController@destroy');
+
+
+
+//Demande
+Route::get('/demandes/index','DemandeController@index');
+Route::get('/demandes/create','DemandeController@create');
+Route::post('/demandes/create','DemandeController@store');
+Route::get('/demandes/{demande}','DemandeController@show');
+Route::get('/demandes/{demande}/edit','DemandeController@edit');
+Route::patch('/demandes/{demande}','DemandeController@update');
+Route::delete('/demandes/{demande}','DemandeController@destroy');
+
+/*
+$pdo = new PDO('mysql:host=localhost;charset=utf8;dbname=depotstage','root','toor');
+$req = $pdo->prepare('select * from competence_demande');
+$req->execute();
+$datas = $req->fetch();
+foreach($datas as $data)
+{
+    dd($datas);
+}
+*/
