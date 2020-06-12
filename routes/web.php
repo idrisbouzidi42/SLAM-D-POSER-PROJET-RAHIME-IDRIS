@@ -25,7 +25,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name
 
 
 Route::get('/', function () {
-    return view('acceuil');
+    return view('accueil');
 });
 
 //Admin

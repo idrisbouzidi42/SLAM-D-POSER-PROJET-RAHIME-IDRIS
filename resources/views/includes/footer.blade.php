@@ -1,96 +1,77 @@
 </main>
-<!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="text-container about">
-                        <h4>DP BTS SIO SLAM</h4>
-                        <p class="white">Proposer aux étudiants du lycée Simone Weil une application web qui va leur permettre de déposer leurs projets informatiques et d’avoir une validation.</p>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-md-2">
-                    <div class="text-container">
-                        <h4>Liens</h4>
-                        <ul class="list-unstyled li-space-lg white">
-                            <li>
-                                <a class="white" href="#your-link">Accueil</a>
-                            </li>
-                            <li>
-                                <a class="white" href="terms-conditions.html">Déposer un projet</a>
-                            </li>
-                            <li>
-                                <a class="white" href="privacy-policy.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-md-2">
-                    <div class="text-container">
-                        <h4>Outils</h4>
-                        <ul class="list-unstyled li-space-lg">
-                            <li>
-                                <a class="white" href="#your-link">Accueil</a>
-                            </li>
-                            <li>
-                               <a class="white" href="#your-link">Déposer un projet</a>
-                            </li>
-                            <li class="media">
-                                <a class="white" href="#your-link">Contact</a>
-                            </li>
-                        </ul>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-md-2">
-                    <div class="text-container">
-                        <h4>Affiliation</h4>
-                        <ul class="list-unstyled li-space-lg">
-                            <li>
-                                <a class="white" href="#your-link">Simone Weil</a>
-                            </li>
-                            <li>
-                                <a class="white" href="#your-link">google.fr</a>
-                            </li>
-                            <li>
-                                <a class="white" href="#your-link">association.gov</a>
-                            </li>
-                        </ul>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
-    <!-- end of footer -->
 
+<section class="footer">
+    <!-- footer-22 -->
+    <div class="footer-hny py-5">
+        <div class="container py-lg-4"> 
+                    <div class="sub-columns row">
+                        <div class="sub-one-left col-lg-4 col-md-6">
+                            <h6>DEPOT PROJET </h6>
+                            <p>Proposer aux entreprises et étudiants du lycée Simone Weil, 
+                                localisé à Saint-Priest-en-Jarez, 
+                                une application web qui va leur permettre de poster des offres et demandes de stages.
+                            </p>
 
-    <!-- Copyright -->
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2020 idris bouzidi</a></p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of copyright --> 
-    <!-- end of copyright -->
-  </footer><!-- End Footer -->
+                        </div>
+                        <div class="sub-two-right col-lg-4 col-md-6 my-md-0 my-5">
+                            <h6>Liens utiles</h6>
+                            <div class="footer-hny-ul">
+                            <ul>
+                                <li><a href="{{ url('/') }}">Accueil</a></li>
+                                <li><a href="{{ url('offres/index') }}">Les offres</a></li>
+                                <li><a href="{{ url('demandes/index') }}">Les demandes</a></li>
+                                <li><a href="{{ url('offres/create') }}">Poster une offre</a></li>
+                                <li><a href="{{ url('offres/demandes') }}">Poster une demande</a></li>
+                                <li><a href="{{ url('contact') }}">Contact</a></li>
+                            </ul>
+                            <ul>
+                                    <li><a href="#">Mentions Légales</a></li>
+                                    <li><a href="#">Politique de confidentialité</a></li>
+                            </ul>
+                           </div>
+                        </div>
 
+                        <div class="sub-one-left col-lg-4 col-md-6 mt-lg-0 mt-md-5">
+                            <h6>Lorem ipsum</h6>
+                        </div>
+                    </div>
+                </div>
+         </div>  
+        <div class="below-section">
+            <div class="container">
+                <div class="copyright-footer row">
+                <div class="columns col-lg-6">
+                    <ul class="social footer">
+                        <li><a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
+                        <li><a href="#"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
+                        <li><a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
+                        <li><a href="#"><span class="fa fa-google" aria-hidden="true"></span></a></li>
+                        <li><a href="#"><span class="fa fa-github" aria-hidden="true"></span></a></li>
+                    </ul>
+                </div>
+                <div class="columns copy-right col-lg-6">
+                    <p>Ce site est la propriété du lycée Simone Weil.<br>
+                    © 2020 Tout droit réservé. Lycée Simone Weil, Saint-Priest-en-Jarez. Réaliser par 
+                    Idris Bouzidi et Rahime Soyiff étudiants BTS SIO.
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
 
   <!-- Bootstrap JqueryJS Files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.min.js"></script>
 
 
 
 
   <!-- Template Main JS File -->
-    <script src="src/js/main.js"></script>
- <script src="src/js/validate.js"></script>
+    <script src="{{ asset('src/js/main.js') }}"></script>
+    <script src="{{ asset('src/js/validate.js') }}"></script>
 </body>
 
 </html>

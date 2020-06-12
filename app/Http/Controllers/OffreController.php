@@ -149,8 +149,7 @@ class OffreController extends Controller
             'adresseWebEntreprise' => 'required',
             'nomTuteurEntreprise' => 'required',
             'rueEntreprise' =>'required',
-            'codePostalEntreprise' => 'required',
-            'villeEntreprise' => 'required'
+            'mailEntreprise' => 'required|email'
         ]);
 
         $offres = request()->validate([
@@ -186,8 +185,7 @@ class OffreController extends Controller
             'adresseWebEntreprise' => 'required',
             'nomTuteurEntreprise' => 'required',
             'rueEntreprise' =>'required',
-            'codePostalEntreprise' => 'required',
-            'villeEntreprise' => 'required',
+            'mailEntreprise' => 'required|email',
 
             'nomOffre' => 'required',
             'dureeOffre' => 'required',

@@ -21,8 +21,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('adresseWebEntreprise');
             $table->string('nomTuteurEntreprise');
             $table->string('rueEntreprise');
-            $table->unsignedInteger('codePostalEntreprise');
-            $table->string('villeEntreprise');
+            $table->string('mailEntreprise');
             $table->timestamps();
         });
     }
