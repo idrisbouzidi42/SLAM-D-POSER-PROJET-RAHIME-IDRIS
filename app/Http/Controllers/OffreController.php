@@ -51,10 +51,12 @@ class OffreController extends Controller
     public function index()
     {
         $offres = Offre::latest()->get();
-        return view('offres.index', compact('offres'));
+        if(count($offres) > 0)
+        {
+           return view('offres.index', compact('offres'));
+        }
+        return view('offres.index', compact('offres'))->withMessage('Aucune offre pour le moment');
     }
-
-
 
     public function create()
     {

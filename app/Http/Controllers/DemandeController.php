@@ -11,20 +11,15 @@ class DemandeController extends Controller
 {
     public function index()
     {
-    
-        $etudiant = new Etudiant();
-        $demandes = Demande::etatDemande();
+        //$demandesEtat = Demande::etatDemande(); // probleme ici car si tu signal bah erreur dans la page
+        $demandes = Demande::latest()->get();
         if(count($demandes) > 0)
         {
-            return view('demandes.index', [
-                'demandes' => $demandes,
-                'etudiant' => $etudiant
-            ]);
+               return view('demandes.index', compact('demandes'));
         }
         else{
-            return view('demandes.index')->withMessage('Aucune demande pour le moment');
+            return view('demandes.index')->withMessage('Aucune Offre pour l\'instant... Soyez le premier ! ');;
         }
-
     }
 
     public function create()
