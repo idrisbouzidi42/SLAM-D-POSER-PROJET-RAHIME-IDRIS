@@ -31,8 +31,6 @@ class OffreController extends Controller
                                 ->orWhere('adresseWebEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('nomTuteurEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('codePostalEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('villeEntreprise', 'LIKE', '%' .$query. '%')
                                 ->get();
    
             $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
@@ -52,14 +50,8 @@ class OffreController extends Controller
 
     public function index()
     {
-        $offres = \App\Offre::etat();
-        if(count($offres) > 0)
-        {
-            return view('offres.index', [
-                'offres' => $offres,
-            ]);
-        }
-        return view('offres.index')->withMessage('Aucune offre pour le moment');
+        $offres = Offre::latest()->get();
+        return view('offres.index', compact('offres'));
     }
 
 
@@ -221,17 +213,3 @@ class OffreController extends Controller
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

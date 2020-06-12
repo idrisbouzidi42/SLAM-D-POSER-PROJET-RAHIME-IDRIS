@@ -17,12 +17,11 @@ class CreateOffresTable extends Migration
             $table->bigIncrements('id');
             $table->string('nomOffre');
             $table->string('dureeOffre');
-            $table->string('descriptionOffre');
+            $table->text('descriptionOffre');
             $table->string('teleTravailOffre');
             $table->string('etat')->nullable()->default('Valide');
             $table->unsignedBigInteger('entreprise_id')->index();
             $table->timestamps();
-
         });
     }
 

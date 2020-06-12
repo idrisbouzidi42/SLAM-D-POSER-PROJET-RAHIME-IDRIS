@@ -170,35 +170,12 @@ h6 {
 }
 
 
-#offres .content {
+#list-offres .content {
 	margin: 0 auto;
 	width: 100%;
 }
 
-#offres .custom-control {
-	margin: 1rem 0;
-}
-
-#offres .custom-control span {
-	color: #fff;
-	padding: 0.4rem 0.7rem 0.4rem 0.7rem;
-	margin: 0 1rem;
-	border-radius: 0.5rem;
-}
-
-#offres .custom-control .color1 {
-	background-color: #FFAF29;
-}
-
-#offres .custom-control .color2 {
-	background-color: #D61A63;
-}
-
-#offres .custom-control .color3 {
-	background-color: #21B2A6;
-}
-
-#offres .offres-content {
+#list-offres .offres-content {
 
 	display: flex;
 	align-items: top;
@@ -212,57 +189,85 @@ h6 {
 	overflow: auto;
 }
 
-#offres .offres-content:hover {
-	border: 0.05rem solid #222;
-	cursor: pointer;
+#list-offres .offres-content:hover {
+	border: 0.05rem solid #ED4933;
 }
 
-#offres .offres-content .left-offres h4 a {
+#list-offres .offres-content .left-offres h4 {
 	font-size: 1.5rem;
 	font-weight: 700;
 	font-family: 'Noto Sans', sans-serif !important;
+	color: #ED4933;
+}
+
+#list-offres .offres-content .left-offres a {
 	color: #222;
-	margin: 0;
 
 }
 
-#offres .offres-content .left-offres h5 {
+#list-offres .offres-content .left-offres a:hover {
+	text-decoration: underline;
+
+}
+
+#list-offres .offres-content .left-offres h5 {
 	font-size: 1rem;
 	font-weight: 700;
 	color: #222;
+	margin: 10px 0;
 	text-transform: capitalize;
-
 }
 
-#offres .offres-content .left-offres span {
+#list-offres .offres-content .left-offres span {
 	font-size: 1rem;
 }
 
-#offres .offres-content .left-offres p {
+#list-offres .offres-content .left-offres p {
 	font-size: 0.9rem;
 	color: #565656;
 }
 
-#offres .center-offres {
+#list-offres .center-offres {
 	align-self: flex-end;
+	margin: 0;
+	padding: 0;
 }
 
-#offres .center-offres a {
+#list-offres .center-offres a {
 	font-size: 0.8rem;
-	background-color: #21B2A6;
+	background-color: #ED4933;
 	color: #fff;
-	padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+	padding: 5px;
+	margin: 5px;
 	border-radius: 0.5rem;
 }
 
-#offres .right-offres {
+#list-offres .center-offres a:hover {
+
+	background-color: #ED4933;
+	text-decoration: underline;
+
+}
+
+#list-offres .right-offres {
 	align-self: flex-end;
+	margin: 0;
+	padding: 0;
+}
+
+#list-offres .right-offres a {
+	color: #222;
+	font-weight: 700;
+}
+
+#list-offres .right-offres a:hover {
+	text-decoration: underline;
 }
 
 
 
 @media (max-width:991px) {
-	#offres .offres-content .center-offres {
+	#list-offres .offres-content .center-offres {
 		margin: 1rem 0;
 	}
 }
