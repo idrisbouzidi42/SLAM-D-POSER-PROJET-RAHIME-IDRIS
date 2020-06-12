@@ -30,8 +30,6 @@ class SearchController extends Controller
                                 ->orWhere('adresseWebEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('nomTuteurEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('codePostalEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('villeEntreprise', 'LIKE', '%' .$query. '%')
                                 ->get();
    
             $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
