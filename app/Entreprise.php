@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entreprise extends Model
 {
-    public $fillable = ['nomEntreprise', 'typeEntreprise','telEntreprise', 'adresseWebEntreprise', 'nomTuteurEntreprise', 'rueEntreprise', 'codePostalEntreprise','villeEntreprise' ];
+    public $fillable = ['nomEntreprise', 'typeEntreprise','telEntreprise', 'adresseWebEntreprise', 'nomTuteurEntreprise', 'rueEntreprise','mailEntreprise' ];
 
 
     public function offres()

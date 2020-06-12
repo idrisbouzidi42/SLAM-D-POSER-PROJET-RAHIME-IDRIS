@@ -1,100 +1,156 @@
 @csrf
-    <div id="form-demande">
+<div class="offres-poste">
+  <div class="form-row">
 
-      <div class="form-group">
-        <label for="titre">Poste recherché <span class="important">(en français)</span>&nbsp;:</label>
-        <input type="text" class="form-control" name="titreDemande" id="titre" placeholder="Nom du poste" value="{{$demande->titreDemande}}" data-desc="#titre_alert" />
+    <div class="form-group col-md-6">
+      <label for="titre">Poste recherché <span class="important">(en français)</span>&nbsp;:</label>
+      <input type="text" class="form-control @error('titreDemande') is-invalid @enderror" name="titreDemande" id="titre"
+        placeholder="Nom du poste" value="{{$demande->titreDemande}}" data-desc="#titre_alert" />
+      @error('titreDemande')
+      <div class="invalid-feedback">
+        {{$errors->first('titreDemande')}}
       </div>
-  
-        
-      <div class="form-group">
-        <label for="duree">Durée souhaitée &nbsp;:</label>
-        <input type="text" class="form-control" name="dureeDemande" id="duree" value="{{$demande->dureeDemande}}" placeholder="En jours, mois, années..." />
-      </div>
+      @enderror
+    </div>
 
-      <div class="form-group">
-        <label for="teleTravailDemande">Teletravail</label>
-        <select name="teleTravailDemande" id="teleTravailDemande" class="form-control @error('teleTravailDemande') is-invalid @enderror" value="{{old('teleTravailDemande') ?? $demande->teleTravailDemande ?? ''}}">
+
+    <div class="form-group col-md-6">
+      <label for="dureeDemande">Durée souhaitée &nbsp;:</label>
+      <input type="text" class="form-control @error('dureeDemande') is-invalid @enderror" name="dureeDemande" id="duree"
+        value="{{$demande->dureeDemande}}" placeholder="En jours, mois, années..." />
+      @error('dureeDemande')
+      <div class="invalid-feedback">
+        {{$errors->first('dureeDemande')}}
+      </div>
+      @enderror
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="teleTravailDemande">Teletravail</label>
+      <select name="teleTravailDemande" id="teleTravailDemande"
+        class="form-control @error('teleTravailDemande') is-invalid @enderror"
+        value="{{old('teleTravailDemande') ?? $demande->teleTravailDemande ?? ''}}">
         <option value=""></option>
         <option {{$demande->teleTravailDemande == 'oui' ? 'selected' : ''}} value=oui>Oui</option>
         <option {{$demande->teleTravailDemande == 'non' ? 'selected' : ''}} value='non'>Non</option>
-        </select>
-        @error('teleTravailDemande')
-        <div class="invalid-feedback">
-            {{$errors->first('teleTravailDemande')}}
+      </select>
+      @error('teleTravailDemande')
+      <div class="invalid-feedback">
+        {{$errors->first('teleTravailDemande')}}
+      </div>
+      @enderror
+    </div>
+
+    <div class="row checkbox-offres">
+      <legend class="fieldset-label">Vos compétences &nbsp;:</legend>
+      @foreach ($competences as $comp)
+      <div class="form-group-lg col-lg-6">
+        <label>
+          <input type="checkbox" name="competences[]" value='{{$comp->id}}' @foreach($demande->competences as $choisi)
+          {{$choisi->id == $comp->id ? 'checked' : ''}} @endforeach
+          > {{$comp->nom}}</label>
+      </div>
+      @endforeach
+    </div>
+
+  </div>
+  <h3>Vous</h3>
+  <div class="form-row">
+
+    <div class="form-group col-md-4">
+      <label for="nom">Votre prénom et nom</label>
+      <input type="text" class="form-control @error('nomEtudiant') is-invalid @enderror" name="nomEtudiant" id="nom"
+        value="{{$demande->etudiant->nomEtudiant}}" data-desc="#nom_alert" />
+      @error('nomEtudiant')
+      <div class="invalid-feedback">
+        {{$errors->first('nomEtudiant')}}
+      </div>
+      @enderror
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="email">E-mail:</label>
+      <input type="email" class="form-control @error('emailEtudiant') is-invalid @enderror" name="emailEtudiant"
+        id="email" value="{{$demande->etudiant->emailEtudiant}}" />
+      @error('emailEtudiant')
+      <div class="invalid-feedback">
+        {{$errors->first('emailEtudiant')}}
+      </div>
+      @enderror
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="tel">Téléphone de contact (facultatif)&nbsp;:</label>
+      <input type="tel" class="form-control" name="telEtudiant" id="tel" value="{{$demande->etudiant->telEtudiant}}" />
+    </div>
+
+    <div class="form-group col-md-8">
+      <label for="presentation">Votre présentation :</label>
+
+      <textarea name="presentationEtudiant" class="form-control @error('presentationEtudiant') is-invalid @enderror"
+        id="presentation" cols="50" rows="10"
+        data-desc="#description_alert">{{$demande->etudiant->presentationEtudiant}}</textarea>
+      @error('presentationEtudiant')
+      <div class="invalid-feedback">
+        {{$errors->first('presentationEtudiant')}}
+      </div>
+      @enderror
+      <p style="color:#ED4933">
+        Présentez-vous en quelques lignes : votre expérience, votre niveau d'études,
+        vos atouts et hobbies. Bref, mettez-vous en valeur !
+        Evitez les copier-coller de CV ou les lettre-types générales..</p>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="addcv">Votre CV à télécharger&nbsp;:</label>
+      <div class="upload-row">
+        <div class="upload-file">
+          <div id="addcv-preview" class="upload-preview"></div>
+          <input type="file" name="cvEtudiant" id="addcv" class="form-control upload-to-preview visuallyhidden"
+            value="{{$demande->etudiant->cvEtudiant}}">
+          <label for="cvcv" class="upload awesome blue small"><i aria-hidden="true"
+              class="icon icon-upload-cloud"></i></label>
         </div>
-        @enderror
+      </div>
+      <p style="color:#ED4933">
+        Votre présentation sera publiée en ligne et consultable par les visiteurs
+        Taille maximum : 1 Mo
+        Formats acceptés *.pdf, *.doc, *.docx, *.odt
+      </p>
     </div>
-  
-    <div class="form-group">
-        <legend class="fieldset-label">Vos compétences &nbsp;:</legend>              
-        <ul class="emploi-competences unstyled">
-            @foreach ($competences as $comp)
-                <li>
-                    <label>
-                    <input type="checkbox"  name="competences[]" value='{{$comp->id}}' 
-                    @foreach($demande->competences as $choisi) 
-                    {{$choisi->id == $comp->id ? 'checked' : ''}} @endforeach
-                    > {{$comp->nom}}</label>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-  
 
-      
-
-  
-
-<br><br>
-      <h3>Vous</h3>  
-      <div class="form-group">
-        <label for="nom">Votre prénom et nom</label>
-        <input type="text" class="form-control" name="nomEtudiant" id="nom" value="{{$demande->etudiant->nomEtudiant}}" data-desc="#nom_alert" />
-      </div>
-  
-      <div class="form-group">
-        <label for="presentation">Votre présentation :</label>
-        <textarea name="presentationEtudiant" class="form-control form-textarea utosize" id="presentation" cols="50" rows="10" data-desc="#description_alert">{{$demande->etudiant->presentationEtudiant}}</textarea>
-      </div>
-  
-    <div class="form-group">
-        <label for="addcv">Votre CV à télécharger&nbsp;:</label>    
-        <div class="upload-row">
-          <div class="upload-file">
-            <div id="addcv-preview" class="upload-preview"></div>
-            <input type="file" name="cvEtudiant" id="addcv" class="form-control upload-to-preview visuallyhidden" value="{{$demande->etudiant->cvEtudiant}}">
-            <label for="cvcv" class="upload awesome blue small"><i aria-hidden="true" class="icon icon-upload-cloud"></i></label>
-          </div>
-        </div>  
+    <div class="form-group col-md-4">
+      <label for="region">Région&nbsp;<span class="important">(uniquement France) </span>:</label>
+      <select name="regionEtudiant" class="form-control" id="region">
+        @foreach ($demande->etudiant->getRegionEtudiantOptions() as $key => $value)
+        <option value="{{$key}}" {{$demande->etudiant->regionEtudiant == $value ? 'selected' : ''}}>{{$value}}</option>
+        @endforeach
+      </select>
     </div>
-  
-    <div class="form-group">
-        <label for="region">Région&nbsp;<span class="important">(uniquement France) </span>:</label>
-        <select name="regionEtudiant" class="form-control" id="region">
-          @foreach ($demande->etudiant->getRegionEtudiantOptions() as $key => $value)
-          <option value="{{$key}}"{{$demande->etudiant->regionEtudiant == $value ? 'selected' : ''}}>{{$value}}</option>
-          @endforeach
-        </select>    
+
+    <div class="form-group col-md-4">
+      <label for="ville">Précisions (ville)&nbsp;:</label>
+      <input type="text" class="form-control" name="villeEtudiant" id="ville"
+        value="{{$demande->etudiant->villeEtudiant}}" />
     </div>
-  
-      <div class="form-group">
-        <label for="ville">Précisions (ville)&nbsp;:</label>
-        <input type="text" class="form-control" name="villeEtudiant" id="ville" value="{{$demande->etudiant->villeEtudiant}}" />
-      </div>
-  
-  
-      <div class="form-group">
-        <label for="tel">Téléphone de contact (facultatif)&nbsp;:</label>
-        <input type="tel" class="form-control" name="telEtudiant" id="tel" value="{{$demande->etudiant->telEtudiant}}" />
-      </div>
-  
-      <div class="form-group">
-        <label for="site">Site web (personnel, portfolio...)&nbsp;:</label>
-        <input type="site" class="form-control" name="siteEtudiant" id="site" value="{{$demande->etudiant->siteEtudiant}}" />
-      </div>
-  
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input type="email" class="form-control" name="emailEtudiant" id="email" value="{{$demande->etudiant->emailEtudiant}}"  />
-      </div>
+
+
+
+
+    <div class="form-group col-md-4">
+      <label for="site">Site web (personnel, portfolio...)&nbsp;:</label>
+      <input type="site" class="form-control" name="siteEtudiant" id="site"
+        value="{{$demande->etudiant->siteEtudiant}}" />
+    </div>
+
+
+  </div>
+  <div class="consignes-form">
+    <p>En Déposant votre annonce, vous certifiez que votre annonce vérifie le règlement général.
+      Conformément à la Loi Informatique et Libertés du 6 janvier 1978, vous disposez
+      d'un droit d'accès et de rectification aux données personnelles vous concernant en nous contactant.</p>
+    <span>
+      <p>Pensez à bien vous relire, qu'il n'y est aucune faute de frappe ou oubli.</p>
+    </span>
+  </div>
+</div>

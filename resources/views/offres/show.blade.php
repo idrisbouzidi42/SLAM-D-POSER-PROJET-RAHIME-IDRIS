@@ -38,6 +38,7 @@
         Téléphone: {{$offre->entreprise->telEntreprise}} <br>
         Site web: {{$offre->entreprise->adresseWebEntreprise}} <br>
         Nom du tuteur: {{$offre->entreprise->nomTuteurEntreprise}} <br>
+        Email du tuteur: {{$offre->entreprise->mailEntreprise}} <br>
         Adresse:  {{$offre->entreprise->rueEntreprise}}, {{$offre->entreprise->codePostalEntreprise}}, {{$offre->entreprise->villeEntreprise}}<br><br>
         
         Compétences requises:
