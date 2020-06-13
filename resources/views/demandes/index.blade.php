@@ -9,7 +9,7 @@
         </div>
 
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content">
-            <form action="/search/demandes" method="POST">
+            <form action="{{ url('search/demandes') }}" method="POST">
                 @csrf
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <input name="demande" class="form-control my-0 py-1 lime-border" type="text"
@@ -28,7 +28,7 @@
             <div class="row offres-content">
 
                 <div class="col-lg-6 left-offres">
-                    <a href="/demandes/{{ $demande->id }}">
+                    <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}">
                         <h4>{{ $demande->titreDemande }}</h4>
                     </a>
                     <h5>{{ $demande->etudiant->nomEtudiant . ', ' . 
@@ -40,12 +40,12 @@
 
                 <div class="col-lg-5 center-offres">
                     @foreach ($demande->competences as $competence)
-                    <a href="/search/{{$competence->nom}}">{{$competence->nom}}</a>
+                    <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
                     @endforeach
                 </div>
 
                 <div class="col-lg-1 right-offres">
-                    <a href="/search/{{$demande->teleTravailDemande}}">
+                    <a href="{{ url('/search/'. $demande->teleTravailOffre) }}">
                         {{ $demande->teleTravailDemande ? 'Télétravail possible' : '' }}
                     </a>
                 </div>

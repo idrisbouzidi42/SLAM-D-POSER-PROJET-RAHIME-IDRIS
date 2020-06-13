@@ -136,25 +136,19 @@ class OffreController extends Controller
 
     public function update(Offre $offre)
     {        
-        $entreprises = request()->validate([
-            'nomEntreprise' => 'required',
-            'typeEntreprise' => 'required',
-            'telEntreprise' => 'required',
-            'adresseWebEntreprise' => 'required',
-            'nomTuteurEntreprise' => 'required',
-            'rueEntreprise' =>'required',
-            'mailEntreprise' => 'required|email'
-        ]);
-
-        $offres = request()->validate([
-            'nomOffre' => 'required',
-            'dureeOffre' => 'required',
-            'descriptionOffre' => 'required',
-            'teleTravailOffre' => 'required'
-        ]);
+    
         /* $competences = implode(' , ',request('competencesOffre')); //Transforme l'array des competences en string*/
+        $entreprises = request()->validate([
+          'nomEntreprise' => 'required|min:2|',
+          'typeEntreprise' => 'required',
+          'telEntreprise' => 'required',
+          'adresseWebEntreprise' => 'required|min:3|max:100',
+          'nomTuteurEntreprise' => 'required|min:3|max:50',
+          'rueEntreprise' => 'required|min:5|max:100',
+          'mailEntreprise' => 'required|email'
+        ]);
         $offre->entreprise()->update($entreprises);
-        $offre->update($offres);
+        $offre->update($this->validator());
         $offre->competences()->sync(request('competences'));
         return redirect('/offres/'.$offre->id);
     }
@@ -173,17 +167,18 @@ class OffreController extends Controller
     public function validator()
     {
         return request()->validate([
-            'nomEntreprise' => 'required',
+            'nomEntreprise' => 'required|min:2|',
             'typeEntreprise' => 'required',
             'telEntreprise' => 'required',
-            'adresseWebEntreprise' => 'required',
-            'nomTuteurEntreprise' => 'required',
-            'rueEntreprise' =>'required',
+            'adresseWebEntreprise' => 'required|min:3|max:100',
+            'nomTuteurEntreprise' => 'required|min:3|max:50',
+            'rueEntreprise' =>'required|min:5|max:100',
             'mailEntreprise' => 'required|email',
 
-            'nomOffre' => 'required',
-            'dureeOffre' => 'required',
-            'descriptionOffre' => 'required',
+            'competences' => 'required_without_all',
+            'nomOffre' => 'required|min:10|max:100',
+            'dureeOffre' => 'required|min:3|max:50',
+            'descriptionOffre' => 'required|min:100|max:5000',
             'teleTravailOffre' => 'required']);
     }
 

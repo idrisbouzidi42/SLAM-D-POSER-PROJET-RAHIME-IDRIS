@@ -11,9 +11,9 @@
 
                 <div class="col-md-8 annonce-content">
                     <div class="container" style="display: flex;  margin-bottom:10px;">
-                        <a href="/offres/{{$offre->id}}/edit" class="btn btn-secondary"
+                        <a href="{{ route('offres.edit', ['offre' => $offre->id]) }}" class="btn btn-secondary"
                             style=" margin-right:5px;">Editer</a>
-                        <form method="POST" action="/offres/{{$offre->id}}">
+                        <form method="POST" action="{{ url("offres/{$offre->id}") }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -35,7 +35,7 @@
                                 </li>
                                 <li><i class="fa fa-star"></i>Compétences requises:<br>
                                     @foreach ($offre->competences as $competence)
-                                    <a class="competences-check" href="/search/{{$competence->nom}}">
+                                    <a class="competences-check" href="{{ url("/search/{$competence->nom}") }}">
                                         <i class="fa fa-check-square-o"></i>{{$competence->nom}}
                                     </a>
                                     @endforeach.</li>

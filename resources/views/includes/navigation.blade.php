@@ -17,16 +17,17 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link page-scroll active" href="index.php">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link page-scroll active" href="/">Accueil</a></li>
                     <!-- Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" href="#about" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle page-scroll" href="#stage" id="navbarDropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">Stage</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ url('offres/create') }}"><span class="item-text">Poster
+                            <a class="dropdown-item" href="{{ route('offres.create') }}"><span class="item-text">Poster
                                     une offre de stage</span></a>
                             <div class="dropdown-items-divide-hr"></div>
-                            <a class="dropdown-item" href="{{ url('demandes/create') }}"><span class="item-text">Poster
+                            <a class="dropdown-item" href="{{ route('demandes.create') }}"><span
+                                    class="item-text">Poster
                                     une demande de stage</span></a>
                         </div>
                     </li>
@@ -35,6 +36,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('demandes/index') }}">Les
                             demandes</a></li>
+                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('contact') }}">Contact</a>
+                    </li>
 
                 </ul>
             </div>

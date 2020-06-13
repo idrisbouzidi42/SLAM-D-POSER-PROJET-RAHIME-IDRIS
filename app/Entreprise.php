@@ -14,5 +14,22 @@ class Entreprise extends Model
         return $this->hasMany('\App\Offre');
     }
 
+    public function getStatusAttribute($attributes)
+    {
+        return $this->getStatusOptions()[$attributes];
+    }
+
+    public function getStatusOptions()
+    {
+        return [
+            'Particulier' => 'Particulier',
+            'Collectivité' => 'Collectivité',
+            'TPE / PME / PMI' => 'TPE / PME / PMI',
+            'Association' => 'Association',
+            'Groupe' => 'Groupe',
+            'Autre' => 'Autre'
+         ];
+    }
+
 
 }

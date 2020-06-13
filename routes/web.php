@@ -63,22 +63,22 @@ Route::post('/contact', 'ContactController@store');
 
 //Offre
 Route::get('/offres/index', 'OffreController@index');
-Route::get('/offres/create', 'OffreController@create');
-Route::post('/offres/create', 'OffreController@store');
-Route::get('/offres/{offre}', 'OffreController@show');
-Route::get('/offres/{offre}/edit', 'OffreController@edit');
-Route::patch('/offres/{offre}', 'OffreController@update');
+Route::get('poster-une-offre.html', 'OffreController@create')->name('offres.create');
+Route::post('poster-une-offre.html', 'OffreController@store')->name('offres.create');
+Route::get('/offres/{offre}', 'OffreController@show')->name('offres.show');
+Route::get('/editer-offre/{offre}', 'OffreController@edit')->name('offres.edit');
+Route::patch('/offres/{offre}', 'OffreController@update')->name('offres.update');
 Route::delete('/offres/{offre}', 'OffreController@destroy');
 
 
 
 //Demande
 Route::get('/demandes/index','DemandeController@index');
-Route::get('/demandes/create','DemandeController@create');
-Route::post('/demandes/create','DemandeController@store');
-Route::get('/demandes/{demande}','DemandeController@show');
-Route::get('/demandes/{demande}/edit','DemandeController@edit');
-Route::patch('/demandes/{demande}','DemandeController@update');
+Route::get('poster-une-demande.html','DemandeController@create')->name('demandes.create');;
+Route::post('poster-une-demande.html','DemandeController@store')->name('demandes.create');
+Route::get('/demande/{demande}','DemandeController@show')->name('demandes.show');
+Route::get('/editer-demande/{demande}','DemandeController@edit')->name('demandes.edit');
+Route::patch('/demandes/{demande}','DemandeController@update')->name('demandes.update');
 Route::delete('/demandes/{demande}','DemandeController@destroy');
 
 /*
