@@ -272,6 +272,48 @@ h6 {
 	}
 }
 
+#annonce-main {
+	background-color: #f0f3f1;
+
+}
+
+#annonce-main p {
+	color: #484848;
+
+}
+
+#annonce-main ul>li {
+	list-style: none;
+	margin: 10px -30px 0;
+	padding: 0;
+}
+
+#annonce-main .annonce-post .annonce-post-time {
+	font-style: italic;
+	font-weight: 600;
+}
+
+#annonce-main .fa {
+	font-size: 18px;
+	margin: 0 10px;
+	color: #ED4933;
+}
+
+#annonce-main .annonce-sidebar .bg-light a {
+	color: #FF2A2A;
+	font-weight: 700;
+}
+
+#annonce-main .annonce-post-details a {
+	color: #ED4933;
+}
+
+#annonce-main .annonce-sidebar h5 {
+	font-size: 20px;
+	font-weight: 900;
+	font-family: Monteserat, sans-serif;
+}
+
 /* contact */
 .contact-main {
 	background-color: #f0f3f1;

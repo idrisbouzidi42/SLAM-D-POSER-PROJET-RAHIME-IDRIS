@@ -1,53 +1,74 @@
-@extends('layouts.app')
+@extends('layouts.base-all')
 
 @section('content')
-<form action="/search/demandes" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-    <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search" aria-label="Search">
-      <div class="input-group-append">
-          <button class="btn btn-secondary" type="submit">Search</button>
-      </div>
+
+
+<section id="annonce-main">
+    <div class="annonce-bg py-5">
+        <div class="container py-5">
+            <div class="row">
+
+                <div class="col-md-8 annonce-content">
+                    <div class="container" style="display: flex;  margin-bottom:10px;">
+                        <a href="/demandes/{{$demande->id}}/edit" class="btn btn-secondary"
+                            style=" margin-right:5px;">Editer</a>
+                        <form method="POST" action="/demandes/{{$demande->id}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+
+                    <div class="annonce-post">
+                        <h2>{{ $demande->titreDemande }}</h2>
+                        <p class="annonce-post-time">{{ $demande->created_at->diffForHumans() }}</p>
+
+                        <p class="annonce-post-desc">{!! nl2br(e($demande->etudiant->presentationEtudiant)) !!}</p>
+                        <hr>
+                        <div class="annonce-post-details">
+                            <h3>Plus d'information</h3>
+                            <ul>
+                                <li><i class="fa fa-calendar-times-o"></i>{{$demande->dureeDemande}}</li>
+                                <li><i
+                                        class="fa fa-home"></i>{{ $demande->etudiant->telEtudiant ? 'Télétravail possible' : '' }}
+                                </li>
+                                <li><i class="fa fa-star"></i>Vos Compétences:<br>
+                                    @foreach ($demande->competences as $competence)
+                                    <a class="competences-check" href="/search/{{$competence->nom}}">
+                                        <i class="fa fa-check-square-o"></i>{{$competence->nom}}
+                                    </a>
+                                    @endforeach.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <aside class="col-md-4 annonce-sidebar">
+                    <div class="p-3 mb-3 bg-light rounded">
+                        <h5>{{$demande->etudiant->nomEtudiant}}</h5>
+                        <p>{{$demande->etudiant->villeEtudiant . '(' . $demande->etudiant->regionEtudiant . ')'}}<br>
+                            <i class="fa fa-file-pdf-o"></i><a href="{{$demande->etudiant->cvEtudiant}}">Télécharger le
+                                CV</a></p>
+                    </div>
+
+                    <div class="p-3 mb-3 bg-light rounded">
+                        <h4>Postuler</h4>
+                        <ul>
+                            <li><i class="fa fa-envelope"></i>E-mail :<a
+                                    href="mailto:{{$demande->etudiant->emailEtudiant}}">
+                                    {{$demande->etudiant->emailEtudiant}}</a></li>
+                            <li><i class="fa fa-link"></i>Site web : {{$demande->etudiant->siteEtudiant}}
+                            </li>
+                            <li><i class="fa fa-phone"></i>Téléphone : {{$demande->etudiant->telEtudiant}}</li>
+                            <li><i class="fa fa-map-marker"></i>Adresse :
+                                {{$demande->etudiant->villeEtudiant . '(' . $demande->etudiant->regionEtudiant . ')'}}
+                            </li>
+                        </ul>
+                    </div>
+                </aside><!-- /.annonce-sidebar -->
+            </div><!-- /.row -->
+        </div>
     </div>
-  </form>
-    <br>
-    <hr>
-    <br>
-
-@can('delete', App\Offre::class)
-<div class="container" style="display: flex;  margin-bottom:10px;">
-    <a href="/demandes/{{$demande->id}}/edit" class="btn btn-secondary" style=" margin-right:5px;">Editer</a>
-    <form method="POST" action="/demandes/{{$demande->id}}">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Supprimer</button>
-    </form> 
-    </div>
-    @endcan
-
-
- 
-   
-
-    <div class="show container" style="color: black;">
-        
-        Poste : {{$demande->titreDemande}} <br>
-        Duree souhaitée : {{$demande->dureeDemande}} <br>
-        Télétrail: {{$demande->teleTravailDemande}} <br><br>
-       
-        Etudiant :  {{$demande->etudiant->nomEtudiant}}<br>
-        Présentation de l'etudiant :  {{$demande->etudiant->presentationEtudiant}}<br>
-        Cv de l'etudiant : {{$demande->etudiant->cvEtudiant}}   <br>
-        Téléphone: {{$demande->etudiant->telEtudiant}} <br>
-        Email : {{$demande->etudiant->emailEtudiant}} <br>
-        Portfolio : {{$demande->etudiant->siteEtudiant}} <br>
-        Lieu:  {{$demande->etudiant->villeEtudiant}}, {{$demande->etudiant->regionEtudiant}}<br><br>
-        
-        Compétences requises:
-        @foreach ($demande->competences as $competence)
-        <a href="/search/{{$competence->nom}} ">{{$competence->nom}}</a> 
-        @endforeach
-        
-    </div>
-<br><br>
+</section>
 @endsection
