@@ -110,7 +110,7 @@
         {{$errors->first('presentationEtudiant')}}
       </div>
       @enderror
-      <p style="color:#ED4933">
+      <p class="rules-form">
         Présentez-vous en quelques lignes : votre expérience, votre niveau d'études,
         vos atouts et hobbies. Bref, mettez-vous en valeur !
         Evitez les copier-coller de CV ou les lettre-types générales..</p>
@@ -121,17 +121,19 @@
       <div class="upload-row">
         <div class="upload-file">
           <div id="addcv-preview" class="upload-preview"></div>
-          <input type="file" name="cvEtudiant" id="addcv" class="form-control upload-to-preview visuallyhidden"
+          <input type="file" name="cvEtudiant" id="addcv"
+            class="form-control @error('cvEtudiant') is-invalid @enderror upload-to-preview visuallyhidden"
             value="{{ old('cvEtudiant') ?? $demande->etudiant->cvEtudiant ?? '' }}">
           <label for="cvcv" class="upload awesome blue small"><i aria-hidden="true"
               class="icon icon-upload-cloud"></i></label>
         </div>
       </div>
-      <p style="color:#ED4933">
-        Votre présentation sera publiée en ligne et consultable par les visiteurs
-        Taille maximum : 1 Mo
-        Formats acceptés *.pdf, *.doc, *.docx, *.odt
-      </p>
+      @error('cvEtudiant')
+      <div class="invalid-feedback d-block">
+        {{$errors->first('cvEtudiant')}}
+      </div>
+      @enderror
+
     </div>
 
     <div class="form-group col-md-4">

@@ -3,7 +3,7 @@
 @section('content')
 
 <h2 class="form-edit-title">Modifier cette demande</h2>
-<form action="{{ route('demandes.edit', ['demande' => $demande->id]) }}" method="post" class="form-edit"
+<form action="{{ route('demandes.update', ['demande' => $demande->id]) }}" method="post" class="form-edit"
   enctype="multipart/form-data">
   @method('PATCH')
   @include('includes.demandes.form')

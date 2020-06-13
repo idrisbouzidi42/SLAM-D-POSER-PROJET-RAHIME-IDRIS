@@ -59,7 +59,7 @@
             </div>
             @enderror
             <br>
-            <p style="color:#ED4933">
+            <p class="rules-form">
                 Pensez à donner le maximum d'informations :
                 type de missions, environnement, salaire prévu, modalités de réponse pour les postulants,
                 temps complet ou temps partiel.</p>

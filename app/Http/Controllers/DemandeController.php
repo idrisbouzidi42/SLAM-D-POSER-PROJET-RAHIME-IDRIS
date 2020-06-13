@@ -13,12 +13,10 @@ class DemandeController extends Controller
     {
         //$demandesEtat = Demande::etatDemande(); // probleme ici car si tu signal bah erreur dans la page
         $demandes = Demande::latest()->get();
-        if(count($demandes) > 0)
-        {
-               return view('demandes.index', compact('demandes'));
-        }
-        else{
-            return view('demandes.index')->withMessage('Aucune Offre pour l\'instant... Soyez le premier ! ');;
+        if (count($demandes) > 0) {
+            return view('demandes.index', compact('demandes'));
+        } else {
+            return view('demandes.index')->withMessage('Aucune demande pour l\'instant... Soyez le premier ! ');;
         }
     }
 
@@ -55,20 +53,20 @@ class DemandeController extends Controller
 
         $this->storeCv($etudiant);
 
-        return back()->with('demande', 'Vos informations ont été soumises avec succès');
+        return redirect(url("demande", [$demande->id]))->with('message', 'Votre demande a bien été ajouter');
     }
 
 
     public function show(Demande $demande)
     {
-        
+
         return view('demandes.show', [
             'demande' => $demande
         ]);
     }
-    
 
-    
+
+
     public function edit(Demande $demande)
     {
         $tuteur = new Etudiant();
@@ -84,31 +82,25 @@ class DemandeController extends Controller
 
     public function update(Demande $demande)
     {
-        $lademande = request()->validate([
-            'titreDemande' => 'required',
-            'dureeDemande' => 'required',
-            'teleTravailDemande' => 'required'
+        $letudiant = request()->validate([
+            'nomEtudiant' => 'required|min:5|',
+            'presentationEtudiant' => 'required|min:100|max:5000',
+            'cvEtudiant' => 'required|mimes:doc,docx,odt,pdf',
+            'regionEtudiant' => 'required',
+            'villeEtudiant' => 'required',
+            'telEtudiant' => 'required|min:5|max:100',
+            'siteEtudiant' => 'required|min:5|max:100',
+            'emailEtudiant' => 'required|email'
         ]);
 
-        $letudiant = request()->validate([
-        'nomEtudiant' => 'required',
-        'presentationEtudiant' => 'required',
-        'cvEtudiant' => 'required',
-        'regionEtudiant' => 'required',
-        'villeEtudiant' => 'required',
-        'telEtudiant' => 'required',
-        'siteEtudiant' => 'required',
-        'emailEtudiant' => 'required'
-        ]); 
-
         $demande->etudiant()->update($letudiant);
-        $demande->update($lademande);
+        $demande->update($this->validator());
         $demande->competences()->sync(request('competences'));
 
         $etudiant = Etudiant::find($demande->etudiant->id);
         $this->storeCv($etudiant);
-        
-        return redirect('/demandes/'.$demande->id);   
+
+        return redirect(url('demandes', [$demande->id]))->with('message', '"' . $demande->titreDemande .  '" a bien été mise à jour');
     }
 
 
@@ -117,8 +109,7 @@ class DemandeController extends Controller
     {
         $demande->etudiant()->delete();
         $demande->delete();
-
-        return redirect('/demandes/index');
+        return redirect(url('demandes/index'))->with('message',  'La demande "' . $demande->titreDemande .  '" a bien été supprimer');
     }
 
 
@@ -126,27 +117,27 @@ class DemandeController extends Controller
     public function validator()
     {
         return request()->validate([
-            'titreDemande' => 'required',
-            'dureeDemande' => 'required',
+            'titreDemande' => 'required|min:2|max:100',
+            'dureeDemande' => 'required|min:3|max:50',
             'teleTravailDemande' => 'required',
+            'competences' => 'required_without_all',
 
-            'nomEtudiant' => 'required',
-            'presentationEtudiant' => 'required',
-            'cvEtudiant' => 'required',
+            'nomEtudiant' => 'required|min:5|',
+            'presentationEtudiant' => 'required|min:100|max:5000',
+            'cvEtudiant' => 'required|mimes:doc,docx,odt,pdf',
             'regionEtudiant' => 'required',
             'villeEtudiant' => 'required',
-            'telEtudiant' => 'required',
-            'siteEtudiant' => 'required',
-            'emailEtudiant' => 'required'           
-            ]);
+            'telEtudiant' => 'required|min:5|max:100',
+            'siteEtudiant' => 'required|min:5|max:100',
+            'emailEtudiant' => 'required|email'
+        ]);
     }
 
 
 
     private function storeCv(Etudiant $etudiant)
     {
-        if(request('cvEtudiant'))
-        {
+        if (request('cvEtudiant')) {
             $etudiant->update([
                 'cvEtudiant' => request('cvEtudiant')->store('cv', 'public'),
             ]);

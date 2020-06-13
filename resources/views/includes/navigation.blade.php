@@ -32,12 +32,12 @@
                         </div>
                     </li>
                     <!-- end of dropdown menu -->
-                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('offres/index') }}">Les offres</a>
+                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('offres/index') }}">Offres de
+                            stage</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('demandes/index') }}">Les
-                            demandes</a></li>
-                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('contact') }}">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('demandes/index') }}">Demandes de
+                            stage</a></li>
+                    <li class="nav-item"><a class="nav-link page-scroll" href="{{ url('contact') }}">Contact</a></li>
 
                 </ul>
             </div>

@@ -45,11 +45,16 @@ h6 {
 
 .alert {
 	text-align: center;
-	margin: 2rem auto;
 	width: 50%;
-
+	height: 7%;
+	position: absolute;
+	left: 25%;
+	right: 0;
+	top: 25%;
+	opacity: 0.8;
+	z-index: 9999;
+	font-size: 18px;
 }
-
 
 /* Features Section Style */
 .section-header {
@@ -505,6 +510,11 @@ h6 {
 	background-color: #f0f3f1;
 }
 
+.all-offres .rules-form{
+	padding: 1rem;
+	background-color: #d1ecf1;
+	color:#0c5460
+}
 .all-offres .checkbox-offres {
 	width: 45%;
 	margin: 0;

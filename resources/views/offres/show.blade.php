@@ -4,6 +4,7 @@
 
 
 
+
 <section id="annonce-main">
     <div class="annonce-bg py-5">
         <div class="container py-5">
@@ -13,10 +14,32 @@
                     <div class="container" style="display: flex;  margin-bottom:10px;">
                         <a href="{{ route('offres.edit', ['offre' => $offre->id]) }}" class="btn btn-secondary"
                             style=" margin-right:5px;">Editer</a>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">
+                            Supprimer
+                        </button>
                         <form method="POST" action="{{ url("offres/{$offre->id}") }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
+
+                            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Êtes-vous sûr de vouloir supprimer cette annonce ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#confirm-delete">
+                                                Oui
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
 

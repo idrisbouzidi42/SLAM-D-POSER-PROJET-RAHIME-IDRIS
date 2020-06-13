@@ -17,26 +17,24 @@ class OffreController extends Controller
     public function search()
     {
         $query = request('demande');
-        if($query != '')
-        {
-            $offres = Offre::where('nomOffre', 'LIKE', '%'. $query. '%')
-                                ->orWhere('dureeOffre', 'LIKE', '%'. $query. '%')
-                                ->orWhere('descriptionOffre', 'LIKE', '%' .$query. '%')
-                                ->orWhere('teleTravailOffre', 'LIKE', '%' .$query. '%')
-                                ->get();
+        if ($query != '') {
+            $offres = Offre::where('nomOffre', 'LIKE', '%' . $query . '%')
+                ->orWhere('dureeOffre', 'LIKE', '%' . $query . '%')
+                ->orWhere('descriptionOffre', 'LIKE', '%' . $query . '%')
+                ->orWhere('teleTravailOffre', 'LIKE', '%' . $query . '%')
+                ->get();
 
-            $entreprises = Entreprise::where('nomEntreprise', 'LIKE', '%'. $query. '%')
-                                ->orWhere('typeEntreprise', 'LIKE', '%'. $query. '%')
-                                ->orWhere('telEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('adresseWebEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('nomTuteurEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
-                                ->get();
-   
-            $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
-    
-            if(count($offres) > 0 || count($competences) > 0 || count($entreprises) > 0 )
-            {
+            $entreprises = Entreprise::where('nomEntreprise', 'LIKE', '%' . $query . '%')
+                ->orWhere('typeEntreprise', 'LIKE', '%' . $query . '%')
+                ->orWhere('telEntreprise', 'LIKE', '%' . $query . '%')
+                ->orWhere('adresseWebEntreprise', 'LIKE', '%' . $query . '%')
+                ->orWhere('nomTuteurEntreprise', 'LIKE', '%' . $query . '%')
+                ->orWhere('rueEntreprise', 'LIKE', '%' . $query . '%')
+                ->get();
+
+            $competences = Competence::where('nom', 'LIKE', '%' . $query . '%')->get();
+
+            if (count($offres) > 0 || count($competences) > 0 || count($entreprises) > 0) {
                 return view('showSearch', [
                     'offres' => $offres,
                     'competences' => $competences,
@@ -51,11 +49,10 @@ class OffreController extends Controller
     public function index()
     {
         $offres = Offre::latest()->get();
-        if(count($offres) > 0)
-        {
-           return view('offres.index', compact('offres'));
+        if (count($offres) > 0) {
+            return view('offres.index', compact('offres'));
         }
-        return view('offres.index', compact('offres'))->withMessage('Aucune offre pour le moment');
+        return view('offres.index', compact('offres'))->withMessage('Aucune Offre pour l\'instant... Soyez le premier ! ');
     }
 
     public function create()
@@ -80,16 +77,16 @@ class OffreController extends Controller
 
     public function store()
     {
-        
-        $entreprise = new Entreprise();       
-        $entreprise= Entreprise::create($this->validator());
+
+        $entreprise = new Entreprise();
+        $entreprise = Entreprise::create($this->validator());
 
         //Model offre
         /*
         $competences = implode(' , ',request('competencesOffre'));
         'competencesOffre' => $competences,*/
 
-        $offre = Offre::create($this->validator() + [            
+        $offre = Offre::create($this->validator() + [
             'entreprise_id' => $entreprise->id
         ]);
 
@@ -99,9 +96,8 @@ class OffreController extends Controller
         //Association
         $offre->entreprise()->associate($entreprise);
         $offre->save();
-        
 
-        return back()->with('offre', 'Votre offre à été soumise avec succès');
+        return redirect(url("offres", [$offre->id]))->with('message', 'Votre offre a bien été ajouter');
     }
 
 
@@ -113,17 +109,16 @@ class OffreController extends Controller
             'offre' => $offre,
 
         ]);
-        
     }
 
 
 
     public function edit(Offre $offre)
     {
-        
-    //$choisi = explode(' , ',$offre->competencesOffre);
-    //Retransformation du string en tableau pour pouvoir faire un foreach et check
-    //dd($comp,$choisi);
+
+        //$choisi = explode(' , ',$offre->competencesOffre);
+        //Retransformation du string en tableau pour pouvoir faire un foreach et check
+        //dd($comp,$choisi);
 
         $competences = Competence::all();
         return view('offres.edit', [
@@ -135,22 +130,22 @@ class OffreController extends Controller
 
 
     public function update(Offre $offre)
-    {        
-    
+    {
+
         /* $competences = implode(' , ',request('competencesOffre')); //Transforme l'array des competences en string*/
         $entreprises = request()->validate([
-          'nomEntreprise' => 'required|min:2|',
-          'typeEntreprise' => 'required',
-          'telEntreprise' => 'required',
-          'adresseWebEntreprise' => 'required|min:3|max:100',
-          'nomTuteurEntreprise' => 'required|min:3|max:50',
-          'rueEntreprise' => 'required|min:5|max:100',
-          'mailEntreprise' => 'required|email'
+            'nomEntreprise' => 'required|min:2|',
+            'typeEntreprise' => 'required',
+            'telEntreprise' => 'required',
+            'adresseWebEntreprise' => 'required|min:3|max:100',
+            'nomTuteurEntreprise' => 'required|min:3|max:50',
+            'rueEntreprise' => 'required|min:5|max:100',
+            'mailEntreprise' => 'required|email'
         ]);
         $offre->entreprise()->update($entreprises);
         $offre->update($this->validator());
         $offre->competences()->sync(request('competences'));
-        return redirect('/offres/'.$offre->id);
+        return redirect(url('offres', [$offre->id]))->with('message', '"' . $offre->nomOffre .  '" a bien été mise à jour');
     }
 
 
@@ -159,7 +154,7 @@ class OffreController extends Controller
     {
         $offre->entreprise->delete();
         $offre->delete();
-        return redirect('/offres/index');               
+        return redirect(url('offres/index'))->with('message',  'L\'offre"' . $offre->nomOffre .  '" a bien été supprimer');
     }
 
 
@@ -172,14 +167,15 @@ class OffreController extends Controller
             'telEntreprise' => 'required',
             'adresseWebEntreprise' => 'required|min:3|max:100',
             'nomTuteurEntreprise' => 'required|min:3|max:50',
-            'rueEntreprise' =>'required|min:5|max:100',
+            'rueEntreprise' => 'required|min:5|max:100',
             'mailEntreprise' => 'required|email',
 
             'competences' => 'required_without_all',
-            'nomOffre' => 'required|min:10|max:100',
+            'nomOffre' => 'required|min:10|max:150',
             'dureeOffre' => 'required|min:3|max:50',
             'descriptionOffre' => 'required|min:100|max:5000',
-            'teleTravailOffre' => 'required']);
+            'teleTravailOffre' => 'required'
+        ]);
     }
 
     public static function remplir()
@@ -206,7 +202,5 @@ class OffreController extends Controller
         Competence::create(['nom' => 'Java']);
         Competence::create(['nom' => 'XML']);
         Competence::create(['nom' => 'Linux']);
-    
     }
-
 }
