@@ -1,5 +1,4 @@
 @csrf
-
 <div class="offres-poste">
     <div class="form-row">
         <div class="form-group col-md-6">

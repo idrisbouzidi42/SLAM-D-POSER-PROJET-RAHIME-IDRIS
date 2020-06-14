@@ -10,22 +10,21 @@ class Etudiant extends Model
         'regionEtudiant' => ''
     ];
 
-    public $fillable = ['nomEtudiant','presentationEtudiant','cvEtudiant','regionEtudiant','villeEtudiant','telEtudiant','siteEtudiant','emailEtudiant' ];
+    public $fillable = ['nomEtudiant', 'presentationEtudiant', 'cvEtudiant', 'regionEtudiant', 'villeEtudiant', 'telEtudiant', 'siteEtudiant', 'emailEtudiant'];
 
     public function demandes()
     {
-        return $this->hasMany('\App\Demande');
+        return $this->hasMany(Demande::class);
     }
 
     public function competences()
     {
-        return $this->belongsToMany('\App\Competence')->withTimestamps();
+        return $this->belongsToMany(Competence::class)->withTimestamps();
     }
 
     public function getRegionEtudiantAttribute($attributes)
     {
         return $this->getRegionEtudiantOptions()[$attributes];
-
     }
 
     public function getRegionEtudiantOptions()

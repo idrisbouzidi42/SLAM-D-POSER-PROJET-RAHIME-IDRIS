@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entreprise extends Model
 {
-    public $fillable = ['nomEntreprise', 'typeEntreprise','telEntreprise', 'adresseWebEntreprise', 'nomTuteurEntreprise', 'rueEntreprise','mailEntreprise' ];
+    public $fillable = ['nomEntreprise', 'typeEntreprise', 'telEntreprise', 'adresseWebEntreprise', 'nomTuteurEntreprise', 'rueEntreprise', 'mailEntreprise'];
 
 
     public function offres()
     {
-        return $this->hasMany('\App\Offre');
+        return $this->hasMany(Offre::class);
     }
 
     public function getStatusAttribute($attributes)
@@ -28,8 +28,6 @@ class Entreprise extends Model
             'Association' => 'Association',
             'Groupe' => 'Groupe',
             'Autre' => 'Autre'
-         ];
+        ];
     }
-
-
 }

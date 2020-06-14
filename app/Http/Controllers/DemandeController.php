@@ -85,7 +85,6 @@ class DemandeController extends Controller
         $letudiant = request()->validate([
             'nomEtudiant' => 'required|min:5|',
             'presentationEtudiant' => 'required|min:100|max:5000',
-            'cvEtudiant' => 'required|mimes:doc,docx,odt,pdf',
             'regionEtudiant' => 'required',
             'villeEtudiant' => 'required',
             'telEtudiant' => 'required|min:5|max:100',
@@ -100,7 +99,7 @@ class DemandeController extends Controller
         $etudiant = Etudiant::find($demande->etudiant->id);
         $this->storeCv($etudiant);
 
-        return redirect(url('demandes', [$demande->id]))->with('message', '"' . $demande->titreDemande .  '" a bien été mise à jour');
+        return redirect(url('/demande', [$demande->id]))->with('message', '"' . $demande->titreDemande .  '" a bien été mise à jour');
     }
 
 
@@ -121,10 +120,9 @@ class DemandeController extends Controller
             'dureeDemande' => 'required|min:3|max:50',
             'teleTravailDemande' => 'required',
             'competences' => 'required_without_all',
-
+            'cvEtudiant' => 'required|mimes:doc,docx,odt,pdf',
             'nomEtudiant' => 'required|min:5|',
             'presentationEtudiant' => 'required|min:100|max:5000',
-            'cvEtudiant' => 'required|mimes:doc,docx,odt,pdf',
             'regionEtudiant' => 'required',
             'villeEtudiant' => 'required',
             'telEtudiant' => 'required|min:5|max:100',

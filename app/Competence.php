@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Competence extends Model
 {
-    protected $fillable =['nom'];
+    protected $fillable = ['nom'];
 
     public function offres()
     {
-        return $this->belongsToMany('\App\Offre')->withTimestamps();
+        return $this->belongsToMany(Offre::class)->withTimestamps();
     }
 
     public function demandes()
     {
-        return $this->belongsToMany('\App\Demande')->withTimestamps();
+        return $this->belongsToMany(Demande::class)->withTimestamps();
     }
-
-
 }

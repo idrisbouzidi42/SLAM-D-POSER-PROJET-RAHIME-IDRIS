@@ -37,11 +37,13 @@ Route::patch('/admin/profile/{user}', 'Admin\AdminController@UpdateEmail');
 Route::get('/admin/password/reset/{user}', 'Admin\AdminController@resetPassForm')->name('PassResetForm');
 Route::patch('/admin/password/reset/{user}', 'Admin\AdminController@updatePass')->name('UpdatePass');
 
+
 Route::get('/admin/competences', 'Admin\AdminController@competences')->name('competences');
-Route::post('/admin/AjouterCompetence','Admin\AdminController@createCompetence')->name('competences');
-Route::get('/admin/competences/edit','Admin\AdminController@editCompetence')->name('competences');
-Route::patch('/admin/competences/{comp}','Admin\AdminController@updateCompetence')->name('competences');
+Route::post('/admin/AjouterCompetence','Admin\AdminController@createCompetence')->name('competences.create');
+Route::get('/admin/competences/edit','Admin\AdminController@editCompetence')->name('competences.edit');
+Route::patch('/admin/competences/{comp}','Admin\AdminController@updateCompetence')->name('competences.update');
 Route::delete('/admin/competences/{comp}', 'Admin\AdminController@destroyCompetence');
+
 
 Route::get('/admin/signal/offres/{offre}','Admin\AdminController@signalOffre');
 Route::get('/admin/unsignal/offres/{offre}','Admin\AdminController@unsignalOffre');

@@ -223,7 +223,8 @@
 /* Header */
 
 .header-all {
-   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../img/76.jpg') center center no-repeat fixed;
+   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+      url('../img/startup-593341_1280.jpg') center center no-repeat fixed;
    background-size: cover;
 }
 

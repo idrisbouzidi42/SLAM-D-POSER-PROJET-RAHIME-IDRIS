@@ -1,54 +1,61 @@
-@extends('layouts.admin')
+@extends('admin.admin-layout')
+
 
 @section('content')
-<form action="/search/all" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-    <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search" aria-label="Search">
-      <div class="input-group-append">
-          <button class="btn btn-secondary" type="submit">Search</button>
-      </div>
-    </div>
-  </form>
-<br>
-<hr>
-<br>
 
-<h4>Compétences</h4>
-<div>
-    <table class="table table-dark w-50">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>#</th>
-            </tr>
-        </thead>
-        <tbody>
-            <td>
-                <form action="/admin/AjouterCompetence" method="POST">
-                    @csrf
-                    <div style="display: flex">
-                            <input class="form-control m-2" type="text" name="nom" placeholder="Nom">
-                            <button class="btn btn-primary m-2">Ajouter</button>
-                    </div>
-                </form>     
-            </td>
+<!-- dashboard + toolbar recherche + sidebar-->
+@include('admin.admin-board')
 
-            @foreach ($competences as $competence)
-            <tr>
-            <td> <form action="/admin/competences/{{$competence->id}}" method="POST">@csrf @method('PATCH') <input type="text" name="nom" value="{{$competence->nom}}">
-            <button class="btn btn-primary" type="submit">Enregistrer</button>
+<div class="container">
+    <h1>Les Compétences </h1>
+    <div class="row mb-3">
+        <div class="col-lg-8 py-3">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-striped ng-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom & Etat & Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($competences as $competence)
+                        <tr>
+                            <td>{{$competence->id}}</td>
+                            <td>
+                                <div style="display: flex">
+                                    <form action="{{ route('competences.update', ['comp' => $competence->id])}} "
+                                        method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input class="form-control" type="text" name="nom" value="{{$competence->nom}}">
+                                        <button class="btn btn-primary m-1" type="submit">Enregistrer</button>
+                                    </form>
+
+                                    <form action="{{ url("/admin/competences/{$competence->id}") }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')<button class="btn btn-danger m-1">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{$competences->links()}}
+            </div>
+        </div>
+
+        <div class="col-lg-4 py-3">
+            <form action="{{ route('competences.create') }}" method="POST">
+                @csrf
+                <div style="display: flex">
+                    <input class="form-control m-2" type="text" name="nom" placeholder="Nom">
+                    <button class="btn btn-primary m-2">Ajouter</button>
+                </div>
             </form>
-                    <div style="display: flex;">
-                        <form action="/admin/competences/{{$competence->id}}" method="POST"> @csrf @method('DELETE')<button class="btn btn-danger m-1">Supprimer</button></form>                   
-                    </div>
-                </td>
-                <td>{{$competence->id}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>  
-    {{$competences->links()}}
+        </div>
+    </div>
 </div>
-
 @endsection

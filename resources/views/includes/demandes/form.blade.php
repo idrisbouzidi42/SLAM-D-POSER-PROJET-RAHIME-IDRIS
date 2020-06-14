@@ -121,18 +121,13 @@
       <div class="upload-row">
         <div class="upload-file">
           <div id="addcv-preview" class="upload-preview"></div>
-          <input type="file" name="cvEtudiant" id="addcv"
-            class="form-control @error('cvEtudiant') is-invalid @enderror upload-to-preview visuallyhidden"
+          <input type="file" name="cvEtudiant" id="addcv" class="form-control upload-to-preview visuallyhidden"
             value="{{ old('cvEtudiant') ?? $demande->etudiant->cvEtudiant ?? '' }}">
           <label for="cvcv" class="upload awesome blue small"><i aria-hidden="true"
               class="icon icon-upload-cloud"></i></label>
         </div>
       </div>
-      @error('cvEtudiant')
-      <div class="invalid-feedback d-block">
-        {{$errors->first('cvEtudiant')}}
-      </div>
-      @enderror
+
 
     </div>
 
@@ -140,9 +135,10 @@
       <label for="region">Région&nbsp;<span class="important">(uniquement France) </span>:</label>
       <select name="regionEtudiant" class="form-control @error('regionEtudiant') is-invalid @enderror" id="region">
         @foreach ($demande->etudiant->getRegionEtudiantOptions() as $key => $value)
-        <option value="{{$key}}"
-          {{ old("regionEtudiant") == $key ?? $demande->etudiant->regionEtudiant  == $key ? 'selected' : '' }}>
-          {{$value}}</option>
+        <option value="{{ $key }}"
+          {{ old('regionEtudiant') == $key ?? $demande->etudiant->regionEtudiant  == $key ? 'selected' : ''}}>
+          {{ $value }}
+        </option>
         @endforeach
       </select>
       @error('regionEtudiant')

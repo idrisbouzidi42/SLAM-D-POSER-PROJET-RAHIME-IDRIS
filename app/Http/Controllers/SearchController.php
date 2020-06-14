@@ -47,7 +47,7 @@ class SearchController extends Controller
                 ])->withQuery($query);
             }
         }
-        return view('offres.searchShow')->withMessage('No results for your query')->withQuery($query);
+        return view('offres.searchShow')->withMessage('Aucun résultat trouvé dans les offres...')->withQuery($query);
     }
 
 
@@ -82,7 +82,7 @@ class SearchController extends Controller
                 'competences' => $competences
             ])->withQuery($query);
         }
-        return view('demandes.searchShow')->withMessage('No query for your query')->withQuery($query);
+        return view('demandes.searchShow')->withMessage('Aucun résultat trouvé dans les demandes...')->withQuery($query);
     }
 
 
@@ -102,8 +102,6 @@ class SearchController extends Controller
                                 ->orWhere('adresseWebEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('nomTuteurEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('codePostalEntreprise', 'LIKE', '%' .$query. '%')
-                                ->orWhere('villeEntreprise', 'LIKE', '%' .$query. '%')
                                 ->get();
 
         $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
@@ -140,7 +138,7 @@ class SearchController extends Controller
                 'users' => $users
             ])->withQuery($query);
         }
-        return view('admin.searchShow')->withMessage('No query at all')->withQuery($query);
+        return view('admin.searchShow')->withMessage('Aucun résultat trouvé du tout...')->withQuery($query);
     }
 
 
@@ -154,6 +152,6 @@ class SearchController extends Controller
                 'competences' => $competences
             ])->withQuery($query);
         }
-        return view('admin.competences.searhShow')->withMessage('No such of a query')->withQuery($query);
+        return view('admin.competences.searhShow')->withMessage('Aucune compétences trouvé')->withQuery($query);
     }
 }

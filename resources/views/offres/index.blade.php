@@ -2,13 +2,13 @@
 
 @section('content')
 
-<section id="list-offres" class="section-padding  py-5">
+<section id="list-annonces" class="section-padding  py-5">
   <div class="container">
     <div class="section-header text-center">
       <h2 class="section-title">Recherche d'annonces stage</h2>
     </div>
 
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 search-content">
       <form action="{{ url('search/offres') }}" method="POST">
         @csrf
         <div class="input-group md-form form-sm form-2 pl-0">
@@ -24,9 +24,9 @@
       <h1>Offres de stage</h1>
       @forelse($offres as $offre)
 
-      <div class="row offres-content">
+      <div class="row annonces-content">
 
-        <div class="col-lg-6 left-offres">
+        <div class="col-lg-6 left-annonces">
           <a href="{{ route('offres.show', ['offre' => $offre->id]) }}">
             <h4>{{ $offre->nomOffre }}</h4>
           </a>
@@ -35,13 +35,13 @@
           <p><b>{{ $offre->created_at->diffForHumans() }}</b></p>
         </div>
 
-        <div class="col-lg-5 center-offres">
+        <div class="col-lg-5 center-annonces">
           @foreach ($offre->competences as $competence)
           <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
           @endforeach
         </div>
 
-        <div class="col-lg-1 right-offres">
+        <div class="col-lg-1 right-annonces">
           <a href="{{ url('/search/'. $offre->teleTravailOffre) }}">
             {{ $offre->teleTravailOffre ? 'Télétravail possible' : '' }}
             <em style="color:red">ne marche pas<em></a>

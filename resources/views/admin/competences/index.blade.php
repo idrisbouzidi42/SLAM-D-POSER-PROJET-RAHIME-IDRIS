@@ -1,59 +1,59 @@
-@extends('layouts.admin')
+@extends('admin.admin-layout')
 
 @section('content')
 
+<!-- dashboard + toolbar recherche + sidebar-->
+@include('admin.admin-board')
 
+<div class="container">
+    <h1>Les Compétences </h1>
+    <div class="row mb-3">
+        <div class="col-lg-6 py-3">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-striped ng-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Etat & Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($competences as $competence)
+                        <tr>
+                            <td>{{$competence->id}}</td>
+                            <td>
+                                {{$competence->nom}}
+                            </td>
+                            <td>
+                                <div style="display: flex;">
+                                    <form action="
+                                    {{ url("/admin/competences/{$competence->id}") }}" method="POST"> @csrf
+                                        @method('DELETE')<button class="btn btn-danger m-1">Supprimer</button>
+                                    </form>
+                                    <a class="btn btn-secondary m-2" href=" 
+                                    {{ route('competences.edit') }}">Modifier</a>
+                                </div>
+                            </td>
 
-<form action="/search/all" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-        <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search"
-            aria-label="Search">
-        <div class="input-group-append">
-            <button class="btn btn-secondary" type="submit">Search</button>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{$competences->links()}}
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <form action="{{ route('competences.create') }}" method="POST">
+                @csrf
+                <div>
+                    <input class="form-control m-2" type="text" name="nom" placeholder="Nom">
+                    <button class="btn btn-primary m-2">Ajouter</button>
+
+                </div>
+            </form>
         </div>
     </div>
-</form>
-<br>
-<hr>
-<br>
-
-<h4>Compétences</h4>
-<div>
-    <table class="table table-dark w-50">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>#</th>
-            </tr>
-        </thead>
-        <tbody>
-            <td>
-                <form action="/admin/AjouterCompetence" method="POST">
-                    @csrf
-                    <div style="display: flex">
-                        <input class="form-control m-2" type="text" name="nom" placeholder="Nom">
-                        <button class="btn btn-primary m-2">Ajouter</button>
-                        <a class="btn btn-secondary m-2" href="/admin/competences/edit">Modifier</a>
-                    </div>
-                </form>
-            </td>
-
-            @foreach ($competences as $competence)
-            <tr>
-                <td>
-                    {{$competence->nom}}
-                    <div style="display: flex;">
-                        <form action="/admin/competences/{{$competence->id}}" method="POST"> @csrf
-                            @method('DELETE')<button class="btn btn-danger m-1">Supprimer</button></form>
-                    </div>
-                </td>
-                <td>{{$competence->id}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{$competences->links()}}
 </div>
-
 @endsection

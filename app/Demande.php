@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Demande extends Model
 {
-    public $fillable = ['titreDemande','dureeDemande','teleTravailDemande', 'etudiant_id'];
+    public $fillable = ['titreDemande', 'dureeDemande', 'teleTravailDemande', 'etudiant_id'];
 
     public function scopeEtatDemande($query)
     {
-        return $query->where('etatDemande','=','Valide')->get();
+        return $query->where('etatDemande', '=', 'Valide')->get();
     }
 
     public function etudiant()
     {
-        return $this->belongsTo('\App\Etudiant');
+        return $this->belongsTo(Etudiant::class);
     }
 
     public function competences()
     {
-        return $this->belongsToMany('\App\Competence')->withTimestamps();
+        return $this->belongsToMany(Competence::class)->withTimestamps();
     }
 }

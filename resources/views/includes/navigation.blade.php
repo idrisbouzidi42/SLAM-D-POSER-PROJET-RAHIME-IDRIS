@@ -1,4 +1,4 @@
-<body>
+<body id="body">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
         <div class="container">
@@ -21,7 +21,7 @@
                     <!-- Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle page-scroll" href="#stage" id="navbarDropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">Stage</a>
+                            aria-haspopup="true" aria-expanded="false">Poster une annonce</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('offres.create') }}"><span class="item-text">Poster
                                     une offre de stage</span></a>

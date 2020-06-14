@@ -26,9 +26,9 @@ class AdminController extends Controller
     public function indexAdmin()
     {
         $offres = Offre::etat(); //Pour compter
-        $offres = Offre::all();
+        $offres = Offre::latest()->paginate(5);
         $users = User::all();
-        $demandes = Demande::all();
+        $demandes = Demande::latest()->paginate(10);
 
         $nbUsers = count($users);
         $total = count($offres);
@@ -79,12 +79,13 @@ class AdminController extends Controller
             'password_confirmation"' => 'min:6'
             ]);
         $user->update(['password' => Hash::make($pass['password'])]);
-        return redirect('/admin/profile/'.$user->id);
+        return redirect(url("/admin/profile/{$user->id}"))
+        ->with('message', ' Le mot de passe de "' . $user->name . '" a bien été mise à jour');
     }
 
     public function competences()
     {
-        $competences = Competence::paginate(3);
+        $competences = Competence::paginate(15);
         return view('admin.competences.index', [
             'competences' => $competences
         ]);
@@ -96,13 +97,14 @@ class AdminController extends Controller
         $newComp->nom = request('nom');
         $newComp->save();
 
-        return back();
+        return redirect(url('/admin/competences'))
+        ->with('message', ' La compétence"' . $newComp->nom . '" a bien été  ajouter ^^');
     }
 
 
     public function editCompetence()
     {
-        $competences = Competence::paginate(3);
+        $competences = Competence::paginate(15);
         return view('admin.competences.edit', [
             'competences' => $competences
         ]);
@@ -114,13 +116,15 @@ class AdminController extends Controller
             'nom' => 'required'
         ]);
         $comp->update($data);
-        return redirect('/admin/competences');
+       return redirect(url('/admin/competences'))
+       ->with('message', ' La compétence"' . $comp->nom . '" a bien été mise à jour ^^');
     }
 
     public function destroyCompetence(Competence $comp)
     {
         $comp->delete();
-        return back();
+        return redirect(url('/admin/competences'))
+        ->with('message', ' La compétence"' . $comp->nom . '" a bien été supprimer !');
     }
 
 
@@ -129,21 +133,24 @@ class AdminController extends Controller
     {
         $offre->etat = "Signalé";
         $offre->save();
-        return redirect('/admin'.'#'.$offre->id);
+        return redirect(url('/admin'))
+        ->with('message', ' L\'offre "' . $offre->nomOffre . '" a été signaler !');
     }
 
     public function unsignalOffre(Offre $offre)
     {
         $offre->etat = "Valide";
         $offre->save();
-        return redirect('/admin'.'#'.$offre->id);
+        return redirect(url('/admin'))
+        ->with('message', ' L\'offre "' . $offre->nomOffre . '" a bien été re-validé ^^');
     }
     
     public function destroyOffre(Offre $offre)
     {
         $offre->entreprise->delete();
         $offre->delete();
-        return redirect('/admin');               
+        return redirect(url('/admin'))
+        ->with('message', 'L\'offre"' . $offre->nomOffre . '" a bien été supprimer !');
     }
 
     
@@ -153,14 +160,16 @@ class AdminController extends Controller
     {
         $demande->etatDemande = 'Signalé';
         $demande->save();
-        return redirect('/admin'.'#'.$demande->id);
+        return redirect(url('/admin'))
+        ->with('message', ' La demande "' . $demande->titreDemande . '" a été signaler !');
     }
 
     public function unsignalDemande(Demande $demande)
     {
         $demande->etatDemande = 'Valide';
         $demande->save();
-        return redirect('/admin'.'#'.$demande->id);
+        return redirect(url('/admin'))
+        ->with('message', ' La demande "' . $demande->titreDemande . '" a bien été re-validé ^^');
     }
 
 
@@ -168,8 +177,8 @@ class AdminController extends Controller
     {
         $demande->etudiant()->delete();
         $demande->delete();
-
-        return redirect('/admin'.'#'.$demande->id);
+        return redirect(url('/admin'))
+        ->with('message', 'La demande "' . $demande->titreDemande . '" a bien été supprimer !');
     }
 
 }

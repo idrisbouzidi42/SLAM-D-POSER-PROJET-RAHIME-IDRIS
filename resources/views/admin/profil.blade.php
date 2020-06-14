@@ -1,20 +1,13 @@
-@extends('layouts.admin')
+@extends('admin.admin-layout')
+
 
 @section('content')
-<form action="/search/all" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-    <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search" aria-label="Search">
-      <div class="input-group-append">
-          <button class="btn btn-secondary" type="submit">Search</button>
-      </div>
-    </div>
-  </form>
-<br>
-<hr>
-<br>
 
-    <h1> Profil de {{Auth::user()->name}}</h1>
+<!-- dashboard + toolbar recherche + sidebar-->
+@include('admin.admin-board')
+
+<div class="container">
+    <h1> Profil Admin de {{Auth::user()->name}}</h1>
     <table class="table">
         <tr>
             <td>Nom : {{Auth::user()->name}}</td>
@@ -29,4 +22,5 @@
             <td><a href="/admin/password/reset/{{Auth::user()->id}}">Changer mon mot de passe</a></td>
         </tr>
     </table>
+</div>
 @endsection

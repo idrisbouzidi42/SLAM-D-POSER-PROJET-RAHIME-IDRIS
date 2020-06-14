@@ -1,117 +1,264 @@
-@extends('layouts.admin')
+@extends('admin.admin-layout')
 
 
 @section('content')
-<form action="/search/all" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-    <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search" aria-label="Search">
-      <div class="input-group-append">
-          <button class="btn btn-secondary" type="submit">Search</button>
-      </div>
-    </div>
-  </form>
-<br>
-<hr>
-<br>
 
-<h1 style="text-align: center">DASHBOARD</h1>
-<div class="container" style="margin-bottom: 30px; color:white;" >
-    <div style="height: 150px;">
-        <div class="h-100 d-inline-block bg-primary" style="width: 200px; margin-left:55px; padding:13px">
-            <p style="font-size:x-large; text-align:center; font-:bold;">Administrateurs</p>
-            <p style="text-align:center; font-size:x-large;">{{$nbUsers}}</p>
+<!-- dashboard + toolbar recherche + sidebar-->
+@include('admin.admin-board')
+
+
+<div class="admin-main">
+    <div class="admin-content container-fluid">
+        <div class="row mb-3">
+
+            <div class="col-xl-3 col-sm-6 py-3">
+                <div class="card bg-success text-white h-100">
+                    <div class="card-body bg-success">
+                        <h6 class="text-uppercase">utilisateurs</h6>
+                        <h1 class="display-4">{{$nbUsers}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 py-3">
+                <div class="card text-white bg-danger h-100">
+                    <div class="card-body bg-danger">
+                        <h6 class="text-uppercase">offres</h6>
+                        <h1 class="display-4">{{$total}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 py-3">
+                <div class="card text-white bg-info h-100">
+                    <div class="card-body bg-info">
+                        <h6 class="text-uppercase">offres Signaler</h6>
+                        <h1 class="display-4">{{ $signaled }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 py-3">
+                <div class="card text-white bg-warning h-100">
+                    <div class="card-body">
+                        <h6 class="text-uppercase">Demandes</h6>
+                        <h1 class="display-4">2</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="h-100 d-inline-block bg-success" style="width: 200px; margin-left:55px; padding:13px">
-            <p style="font-size:x-large; text-align:center; font-:bold;">Offres total</p>
-            <p style="text-align:center; font-size:x-large;">{{$total}}</p>
+        <div class="col-lg-12 py-3">
+            <h1>LES OFFRES</h1>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-offre-valid-tab" data-toggle="pill" href="#pills-offre-valid"
+                        role="tab" aria-controls="pills-offre-valid" aria-selected="true">Offres Valider</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-offre-flag-tab" data-toggle="pill" href="#pills-offre-flag" role="tab"
+                        aria-controls="pills-offre-flag" aria-selected="false">Offres Signaler</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-offre-valid" role="tabpanel" aria-labelledby="gg">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped ng-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Offre</th>
+                                    <th>Entreprise</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($offres as $offre)
+                                <tr>
+                                    @if ($offre->etat == 'Valide')
+                                    <td style="width: 1%">{{$offre->id}}</td>
+                                    <td style="width: 8%">{{$offre->created_at->format('Y-m-d')}}</td>
+                                    <td style="width: 35%">{{$offre->nomOffre}}</td>
+                                    <td style="width: 20%">({{$offre->entreprise->nomEntreprise}})</td>
+                                    <td>{{$offre->etat}}</td>
+                                    <td class="d-flex">
+
+                                        <a class="btn btn-primary m-2"
+                                            href="{{ route('offres.show', ['offre' => $offre->id]) }}">Voir</a>
+                                        <a href="{{ route('offres.edit', ['offre' => $offre->id]) }}"
+                                            class="btn btn-secondary m-2" style=" margin-right:5px;">Editer</a>
+                                        <a class="btn btn-warning m-2" id="{{$offre->id}}"
+                                            href="{{ url('admin/signal/offres', [$offre->id]) }}">Signaler</a>
+                                        <form method="POST" action="{{ url('admin/offres', [$offre->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger m-2">Supprimer</button>
+                                    </td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $offres->links() }}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-offre-flag" role="tabpanel" aria-labelledby="pills-offre-flag-tab">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped ng-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Offre</th>
+                                    <th>Entreprise</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($offres as $offre)
+                                <tr>
+                                    @if ($offre->etat != 'Valide')
+
+                                    <td style="width: 1%">{{$offre->id}}</td>
+                                    <td style="width: 8%">{{$offre->created_at->format('Y-m-d')}}</td>
+                                    <td style="width: 35%">{{$offre->nomOffre}}</td>
+                                    <td style="width: 20%">
+                                        ({{$offre->entreprise->nomEntreprise}})</td>
+                                    <td>{{$offre->etat}}</td>
+                                    <td class="d-flex">
+                                        <a class="btn btn-primary m-2"
+                                            href="{{ route('offres.show', ['offre' => $offre->id]) }}">Voir</a>
+                                        <a href="{{ route('offres.edit', ['offre' => $offre->id]) }}"
+                                            class="btn btn-secondary m-2" style=" margin-right:5px;">Editer</a>
+                                        <a class="btn btn-danger m-2" id="{{$offre->id}}"
+                                            href="{{ url("admin/unsignal/offres/{$offre->id}") }}">Désignaler</a>
+                                        <form method="POST" action="{{ url("admin/offres/{$offre->id}") }}"
+                                            style="margin: 0px">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger m-2">Supprimer</button>
+                                        </form>
+                                    </td>
+                                    @endif
+                                </tr>
+
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="h-100 d-inline-block bg-warning" style="width: 200px; margin-left:55px; padding:13px">
-            <p style="font-size:x-large; text-align:center; font-:bold;">En attentes</p>
-            <p style="text-align:center; font-size:x-large;">{{$attente}}</p>
-        </div>
-        <div class="h-100 d-inline-block bg-danger" style="width: 200px; margin-left:55px; padding:13px">
-            <p style="font-size:x-large; text-align:center; font-:bold;">Offres signalées</p>
-            <p style="text-align:center; font-size:x-large;">{{$signaled}}</p>
+        <div class="col-lg-12 py-5">
+            <h1>LES DEMANDES</h1>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-demande-valid-tab" data-toggle="pill"
+                        href="#pills-demande-valid" role="tab" aria-controls="pills-demande-valid"
+                        aria-selected="true">Demandes Valider</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-demande-flag-tab" data-toggle="pill" href="#pills-demande-flag"
+                        role="tab" aria-controls="pills-demande-flag" aria-selected="false">Demandes Signaler</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-demande-valid" role="tabpanel"
+                    aria-labelledby="pills-demande-valid-tab">
+
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped ng-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Demande</th>
+                                    <th>Etudiant</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($demandes as $demande)
+                                <tr>
+                                    @if ($demande->etatDemande == 'Valide')
+
+                                    <td style="width: 1%">{{$demande->id}}</td>
+                                    <td style="width: 8%">{{$offre->created_at->format('Y-m-d')}}</td>
+                                    <td style="width: 35%">{{$demande->titreDemande}}</td>
+                                    <td style="width: 20%">({{$demande->etudiant->nomEtudiant}})
+                                    </td>
+                                    <td>{{$demande->etatDemande}}</td>
+                                    <td class="d-flex">
+                                        <a class="btn btn-primary m-2"
+                                            href="{{ route('demandes.show', [$demande->id]) }}">Voir</a>
+                                        <a href="{{ route('demandes.edit', ['demande' => $demande->id]) }}"
+                                            class="btn btn-secondary m-2" style=" margin-right:5px;">Editer</a>
+                                        <a class="btn btn-warning m-2" id="{{$demande->id}}"
+                                            href="{{ url("admin/signal/demandes/{$demande->id}") }}">Signaler</a>
+                                        <form method="POST" action="{{ url("admin/demandes/{$demande->id}") }}"
+                                            style="margin: 0px">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger m-2">Supprimer</button>
+                                        </form>
+                                    </td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $demandes->links() }}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-demande-flag" role="tabpanel"
+                    aria-labelledby="pills-demande-flag-tab">
+
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped ng-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Demande</th>
+                                    <th>Etudiant</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($demandes as $demande)
+                                <tr>
+                                    @if ($demande->etatDemande != 'Valide')
+
+                                    <td style="width: 1%">{{$demande->id}}</td>
+                                    <td style="width: 8%">{{$offre->created_at->format('Y-m-d')}}</td>
+                                    <td style="width: 35%">{{$demande->titreDemande}}</td>
+                                    <td style="width: 20%">({{$demande->etudiant->nomEtudiant}})
+                                    </td>
+                                    <td>{{$demande->etatDemande}}</td>
+                                    <td class="d-flex">
+                                        <a class="btn btn-primary m-2" href="/offres/{{$demande->id}}">Voir</a>
+                                        <a href="{{ route('demandes.edit', ['demande' => $demande->id]) }}"
+                                            class="btn btn-secondary m-2" style=" margin-right:5px;">Editer</a>
+                                        <a class="btn btn-danger m-2" id="{{$demande->id}}"
+                                            href="{{ url("admin/unsignal/demandes/{$demande->id}") }}">Désignaler</a>
+                                        <form method="POST" action="{{ url("admin/demandes/{$demande->id}") }}"
+                                            style="margin: 0px">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger m-2">Supprimer</button>
+                                        </form>
+                                    </td>
+                                    @endif
+                                </tr>
+
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<h4>Offres</h4>
-<table class="table table-dark">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Titre</th>
-            <th>Etat</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($offres as $offre)
-        <tr>
-            <td>{{$offre->id}}</td>
-            <td>{{$offre->nomOffre}} ({{$offre->entreprise->nomEntreprise}})</td>
-            <td>{{$offre->etat}}</td>
-            <td>
-                <div class="container" style="display: flex;">
-                    <a class="btn btn-primary m-2" href="/offres/{{$offre->id}}">Voir</a>
-                    @if ($offre->etat == 'Valide')
-                    <a class="btn btn-warning m-2" id="{{$offre->id}}" href="/admin/signal/offres/{{$offre->id}}/">Signaler</a>
-                    @else
-                    <a class="btn btn-danger m-2" id="{{$offre->id}}" href="/admin/unsignal/offres/{{$offre->id}}/">Désignaler</a>
-                    @endif
-                    <form method="POST" action="/admin/offres/{{$offre->id}}" style="margin: 0px">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger m-2">Supprimer</button>
-                    </form>                        
-                </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
-<br><br><br>
-<h4>Demandes</h4>
-<table class="table table-dark">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Titre</th>
-            <th>Etat</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($demandes as $demande)
-        <tr>
-            <td>{{$demande->id}}</td>
-            <td>{{$demande->titreDemande}} ({{$demande->etudiant->nomEtudiant}})</td>
-            <td>{{$demande->etatDemande}}</td>
-            <td>
-                <div id="{{$demande->id}}" class="container" style="display: flex;">
-                    <a class="btn btn-primary m-2" href="/offres/{{$demande->id}}">Voir</a>
-                    @if ($demande->etatDemande == 'Valide')
-                    <a class="btn btn-warning m-2"  href="/admin/signal/demandes/{{$demande->id}}/">Signaler</a>
-                    @else
-                    <a class="btn btn-danger m-2"  href="/admin/unsignal/demandes/{{$demande->id}}/">Désignaler</a>
-                    @endif
-                    <form method="POST" action="/admin/demandes/{{$demande->id}}" style="margin: 0px">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger m-2">Supprimer</button>
-                    </form>                        
-                </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
-<br><br><br>
-<h3>Modifier des tables</h3>
-<a href="/admin/competences">Compétences</a>
 @endsection
-
