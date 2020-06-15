@@ -6,7 +6,7 @@
 @include('admin.admin-board')
 
 <div class="container">
-    <h1>Les Compétences </h1>
+    <h1>Les compétences </h1>
     <div class="row mb-3">
         <div class="col-lg-6 py-3">
             <div class="table-responsive">

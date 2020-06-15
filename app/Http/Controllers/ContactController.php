@@ -23,6 +23,6 @@ class ContactController extends Controller
 
         Mail::to('rsoyiffi12@gmail.com')->send(new ContactMail($data));
 
-        return back()->with('contact', 'You\'re email was sent successfully');
+        return back()->with('message', 'Votre message a été envoyé avec succès');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
 
-
+@if(!session()->has('message'))
 <section class="contact-main">
     <div class="contact1-bg py-5">
         <div class="container py-5">
@@ -114,5 +114,6 @@
         </div>
     </div>
 </section>
+@endif
 
 @endsection

@@ -14,7 +14,7 @@
             <div class="col-xl-3 col-sm-6 py-3">
                 <div class="card bg-success text-white h-100">
                     <div class="card-body bg-success">
-                        <h6 class="text-uppercase">utilisateurs</h6>
+                        <h6 class="text-uppercase">administrateurs</h6>
                         <h1 class="display-4">{{$nbUsers}}</h1>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             <div class="col-xl-3 col-sm-6 py-3">
                 <div class="card text-white bg-info h-100">
                     <div class="card-body bg-info">
-                        <h6 class="text-uppercase">offres Signaler</h6>
+                        <h6 class="text-uppercase">offres Signalées</h6>
                         <h1 class="display-4">{{ $signaled }}</h1>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="card text-white bg-warning h-100">
                     <div class="card-body">
                         <h6 class="text-uppercase">Demandes</h6>
-                        <h1 class="display-4">2</h1>
+                        <h1 class="display-4">{{ $nbDemandes }}</h1>
                     </div>
                 </div>
             </div>
@@ -49,11 +49,11 @@
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-offre-valid-tab" data-toggle="pill" href="#pills-offre-valid"
-                        role="tab" aria-controls="pills-offre-valid" aria-selected="true">Offres Valider</a>
+                        role="tab" aria-controls="pills-offre-valid" aria-selected="true">Offres Validées</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-offre-flag-tab" data-toggle="pill" href="#pills-offre-flag" role="tab"
-                        aria-controls="pills-offre-flag" aria-selected="false">Offres Signaler</a>
+                        aria-controls="pills-offre-flag" aria-selected="false">Offres Signalées</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -154,11 +154,11 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-demande-valid-tab" data-toggle="pill"
                         href="#pills-demande-valid" role="tab" aria-controls="pills-demande-valid"
-                        aria-selected="true">Demandes Valider</a>
+                        aria-selected="true">Demandes Validées</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-demande-flag-tab" data-toggle="pill" href="#pills-demande-flag"
-                        role="tab" aria-controls="pills-demande-flag" aria-selected="false">Demandes Signaler</a>
+                        role="tab" aria-controls="pills-demande-flag" aria-selected="false">Demandes Signalées</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">

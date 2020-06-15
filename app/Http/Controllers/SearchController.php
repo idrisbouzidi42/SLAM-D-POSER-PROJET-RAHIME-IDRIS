@@ -154,4 +154,32 @@ class SearchController extends Controller
         }
         return view('admin.competences.searhShow')->withMessage('Aucune compétences trouvé')->withQuery($query);
     }
+
+
+    public function searchTeletravailOffre()
+    {
+        $OffresTeletravail = Offre::where('teleTravailOffre','=','oui')
+                                    ->get();
+        if(count($OffresTeletravail) > 0)
+        {
+            return view('searchTeletravail.teletravailOffre', [
+            'offres' => $OffresTeletravail
+            ]);
+        }
+        return view('searchTeletravail.teletravailOffre')->withMessage('Aucune offre trouvé');
+    }
+
+
+    public function searchTeletravailDemande()
+    {
+        $DemandesTeletravail = Demande::where('teleTravailDemande','=','oui')
+                                        ->get();
+        if(count($DemandesTeletravail) > 0)
+        {
+            return view('searchTeletravail.teletravailDemande',[ 
+                'demandes' => $DemandesTeletravail
+                ]);
+        }
+        return view('searchTeletravail.teletravailDemande')->withMessage('Aucune demande trouvé');
+    }
 }

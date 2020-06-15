@@ -28,7 +28,7 @@
                     <a class="nav-link" href="{{ url('offres/index') }}">Offres de stage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('demandes/index') }}">demandes de stage</a>
+                    <a class="nav-link" href="{{ url('demandes/index') }}">Demandes de stage</a>
                 </li>
 
             </ul>
@@ -45,7 +45,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>{{ Auth::user()->name }}
+                        <i class="fa fa-user mr-1"></i>{{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-hover"
                         aria-labelledby="navbarDropdownMenuLink-333">

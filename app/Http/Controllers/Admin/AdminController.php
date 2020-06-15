@@ -29,18 +29,20 @@ class AdminController extends Controller
         $offres = Offre::latest()->paginate(5);
         $users = User::all();
         $demandes = Demande::latest()->paginate(10);
-
+        $offresignale = Offre::signaled();
+        
         $nbUsers = count($users);
         $total = count($offres);
         $affiche = count($offres);
-        $signaled = $total - $affiche;
+        $signaled = count($offresignale);
+        $nbDemandes = count($demandes);
         return view('admin.index', [
             'offres' => $offres,
             'total' => $total,
             'signaled' => $signaled,
             'nbUsers' => $nbUsers,
-            'attente' => 0,
-            'demandes' => $demandes
+            'demandes' => $demandes,
+            'nbDemandes' => $nbDemandes
         ]);
     }
 

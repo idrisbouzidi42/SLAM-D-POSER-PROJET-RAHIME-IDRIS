@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
         <div class="container">
             <div class="navbar-brand">
-                <a class="logo-text" href="index.php">DEPOT STAGE</a><br>
+                <a class="logo-text" href="/">DEPOT STAGE</a><br>
                 <em>Projet scolaire, Lycée Simone Weil</em>
             </div>
 

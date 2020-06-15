@@ -20,8 +20,8 @@
                             <li><a href="{{ url('/') }}">Accueil</a></li>
                             <li><a href="{{ url('offres/index') }}">Les offres</a></li>
                             <li><a href="{{ url('demandes/index') }}">Les demandes</a></li>
-                            <li><a href="{{ url('offres/create') }}">Poster une offre</a></li>
-                            <li><a href="{{ url('offres/demandes') }}">Poster une demande</a></li>
+                            <li><a href="{{ route('offres.create') }}">Poster une offre</a></li>
+                            <li><a href="{{ route('demandes.create') }}">Poster une demande</a></li>
                             <li><a href="{{ url('contact') }}">Contact</a></li>
                         </ul>
                         <ul>

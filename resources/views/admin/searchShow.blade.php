@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.admin-layout')
 @section('content')
 <style>
     .tagtag {
@@ -21,21 +21,8 @@
         margin-bottom: 10px;
     }
 </style>
+@include('admin.admin-board')
 
-<form action="/search/all" method="POST">
-    @csrf
-    <div class="input-group md-form form-sm form-2 pl-0">
-        <input name="demande" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search"
-            aria-label="Search">
-        <div class="input-group-append">
-            <button class="btn btn-secondary" type="submit">Search</button>
-        </div>
-    </div>
-</form>
-
-<br>
-<hr>
-<br>
 
 <!-- Search Demande -->
 <div class="container">
@@ -46,7 +33,7 @@
     <ul>
         <li scope="row"><span>{{$demande->titreDemande}}</span>
             <span class="tagtag">{{$demande->dureeDemande}}</span>
-            <a href="/demandes/{{$demande->id}}">Voir l'offre</a></li>
+            <a href="/demande/{{$demande->id}}">Voir l'offre</a></li>
     </ul>
     @endforeach
     @endif

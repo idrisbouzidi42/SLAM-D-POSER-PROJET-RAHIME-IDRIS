@@ -1,7 +1,6 @@
 @extends('layouts.base-all')
 
 @section('content')
-
 <section id="list-annonces" class="section-padding  py-5">
     <div class="container">
         <div class="section-header text-center">
@@ -20,7 +19,7 @@
             </form>
         </div>
         <div class="col-sm-12 py-5">
-            <h1>Demande de stage</h1>
+            <h1>Demandes disponibles en télétravail</h1>
 
             @if(isset($demandes))
             @foreach($demandes as $demande)
@@ -43,11 +42,6 @@
                     @endforeach
                 </div>
 
-                <div class="col-lg-1 right-annonces">
-                    <a href="{{ url('/search/demandes/teletravail') }}">
-                        {{ $demande->teleTravailDemande == 'oui' ? 'Télétravail possible' : '' }}
-                    </a>
-                </div>
             </div><br>
             @endforeach
             @else

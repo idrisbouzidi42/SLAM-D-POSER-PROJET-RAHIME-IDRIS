@@ -22,4 +22,9 @@ class Offre extends Model
     {
         return $query->where('etat', '=', 'Valide')->get();
     }
+
+    public function scopeSignaled($query)
+    {
+        return $query->where('etat','=', 'Signalé')->get();
+    }
 }

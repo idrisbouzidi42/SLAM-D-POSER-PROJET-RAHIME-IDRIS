@@ -58,6 +58,8 @@ Route::post('/search/offres', 'SearchController@searchOffre');
 Route::post('/search/demandes', 'SearchController@searchDemande');
 Route::post('/search/all', 'SearchController@searchAll');
 Route::get('/search/{query}', 'SearchController@searchCompetence');
+Route::get('/search/offres/teletravail', 'SearchController@searchTeletravailOffre');
+Route::get('/search/demandes/teletravail', 'SearchController@searchTeletravailDemande');
 
 //Contact
 Route::get('/contact', 'ContactController@create');

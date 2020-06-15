@@ -136,7 +136,7 @@
       <select name="regionEtudiant" class="form-control @error('regionEtudiant') is-invalid @enderror" id="region">
         @foreach ($demande->etudiant->getRegionEtudiantOptions() as $key => $value)
         <option value="{{ $key }}"
-          {{ old('regionEtudiant') == $key ?? $demande->etudiant->regionEtudiant  == $key ? 'selected' : ''}}>
+          {{ $demande->etudiant->regionEtudiant == $value ? 'selected' : '' ?? old('regionEtudiant') == $key ? 'selected' :''}}>
           {{ $value }}
         </option>
         @endforeach

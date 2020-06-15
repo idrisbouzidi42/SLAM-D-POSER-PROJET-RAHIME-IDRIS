@@ -1,56 +1,82 @@
-@extends('layouts.app')
+@extends('layouts.base-all')
 
 @section('content')
-<style>
-    .tagtag {
-        color: white;
-        padding: 5px;
-        margin-left: 10px;
-        margin-right: 10px;
-        border-radius: 3px;
-        background-color: #113448;
-    }
 
-    .tag {
-        padding: 5px;
-        margin-left: 10px;
-        margin-right: 10px;
-        border-radius: 3px;
-    }
+<!--- Liste des offres contenant le tag --->
+<section id="list-annonces" class="section-padding  py-5">
+    <div class="container">
+        @forelse($competences as $competence)
+        <div class="col-sm-12 py-5">
+            <h1>Offres contenant le tag "{{$query}}"</h1>
 
-    tr {
-        margin-bottom: 10px;
-    }
-</style>
+            @forelse ($competence->offres as $offre)
+            <div class="row annonces-content">
 
-<h1>Resultat pour les tag "{{$query}}" </h1>
-@foreach ($competences as $competence)
-@if (count($competence->offres) > 0 || count($competence->demandes) > 0)
-@if ($competence->offres && count($competence->offres) > 0)
-<h5 style="color: black">Offres</h5>
-@foreach ($competence->offres as $offre)
-<ul>
-    <li scope="row"><span>{{$offre->nomOffre}}</span>
-        <span class="tag">{{$offre->dureeOffre}}</span>
-        <span class="tagtag">{{$competence->nom}} </span>
-        <a href="/offres/{{$offre->id}}">Voir l'offre</a></li>
-</ul>
-@endforeach
-@endif
-@if ($competence->demandes && count($competence->demandes) > 0)
-<h5 style="color: black">Demandes</h5>
-@foreach ($competence->demandes as $demande)
-<ul>
-    <li scope="row"><span>{{$demande->titreDemande}}</span>
-        <span class="tag">{{$demande->dureeDemande}}</span>
-        <span class="tagtag">{{$competence->nom}} </span>
-        <a href="/demandes/{{$demande->id}}">Voir la demande</a></li>
-</ul>
-@endforeach
-@endif
-@else
-<p>{{$message}}</p>
-@endif
-@endforeach
+                <div class="col-lg-6 left-annonces">
+                    <a href="{{ route('offres.show', ['offre' => $offre->id]) }}">
+                        <h4>{{ $offre->nomOffre }}</h4>
+                    </a>
+                    <h5>{{ $offre->entreprise->nomEntreprise . ', ' . $offre->entreprise->rueEntreprise }}
+                    </h5>
+                    <p>{{ substr($offre->descriptionOffre,0,200).'...' }}</p>
+                    <p><b>{{ $offre->created_at->diffForHumans() }}</b></p>
+                </div>
+
+                <div class="col-lg-5 center-annonces">
+                    @foreach ($offre->competences as $competence)
+                    <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
+                    @endforeach
+                </div>
+
+            </div><br>
+            @endforeach
+            @empty
+            <h3>Aucune offre n'a ce tag </h3>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<!-- Liste des demandes contenant le tag --->
+<section id="list-annonces" class="section-padding  py-5">
+    <div class="container">
+        @foreach($competences as $competence)
+        <div class="col-sm-12 py-5">
+            <h1>Demandes contenant le tag "{{$query}}"</h1>
+
+            @forelse($competence->demandes as $demande)
+            <div class="row annonces-content">
+
+                <div class="col-lg-6 left-annonces">
+                    <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}">
+                        <h4>{{ $demande->titreDemande }}</h4>
+                    </a>
+                    <h5>{{ $demande->etudiant->nomEtudiant . ', ' . 
+                    $demande->etudiant->regionEtudiant .'('. $demande->etudiant->villeEtudiant .')' }}
+                    </h5>
+                    <p>{{ substr($demande->etudiant->presentationEtudiant,0,200).'...' }}</p>
+                    <p><b>{{ $demande->created_at->diffForHumans() }}</b></p>
+                </div>
+
+                <div class="col-lg-5 center-annonces">
+                    @foreach ($demande->competences as $competence)
+                    <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
+                    @endforeach
+                </div>
+
+                <div class="col-lg-1 right-annonces">
+                    <a href="{{ url('/search/demandes/teletravail') }}">
+                        {{ $demande->teleTravailDemande == 'oui' ? 'Télétravail possible' : '' }}
+                    </a>
+                </div>
+            </div><br>
+            @endforeach
+            @empty
+            <h3>Aucune demande n'a ce tag </h3>
+            @endforelse
+        </div>
+</section>
 
 @endsection

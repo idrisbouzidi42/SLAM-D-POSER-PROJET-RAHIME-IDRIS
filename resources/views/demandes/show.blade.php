@@ -10,6 +10,7 @@
 
                 <div class="col-md-8 annonce-content">
                     <div class="container" style="display: flex;  margin-bottom:10px;">
+                        @auth
                         <a href="{{ route('demandes.edit', ['demande' => $demande->id]) }}" class="btn btn-secondary"
                             style=" margin-right:5px;">Editer</a>
                         <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">
@@ -20,6 +21,7 @@
                             @method('DELETE')
                             @include('includes.confirme-modal')
                         </form>
+                        @endauth
                     </div>
 
                     <div class="annonce-post">
@@ -33,7 +35,7 @@
                             <ul>
                                 <li><i class="fa fa-calendar-times-o"></i>{{$demande->dureeDemande}}</li>
                                 <li><i
-                                        class="fa fa-home"></i>{{ $demande->etudiant->telEtudiant ? 'Télétravail possible' : '' }}
+                                        class="fa fa-home"></i>{{ $demande->teleTravailDemande == 'oui' ? 'Télétravail possible' : 'Télétravail non disponible' }}
                                 </li>
                                 <li><i class="fa fa-star"></i>Vos Compétences:<br>
                                     @foreach ($demande->competences as $competence)

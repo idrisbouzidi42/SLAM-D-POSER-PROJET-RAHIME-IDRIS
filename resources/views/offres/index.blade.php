@@ -42,13 +42,13 @@
         </div>
 
         <div class="col-lg-1 right-annonces">
-          <a href="{{ url('/search/'. $offre->teleTravailOffre) }}">
-            {{ $offre->teleTravailOffre ? 'Télétravail possible' : '' }}
-            <em style="color:red">ne marche pas<em></a>
+          <a href="{{ url('/search/offres/teletravail') }}">
+            {{ $offre->teleTravailOffre == 'oui' ? 'Télétravail possible' : '' }}
+          </a>
         </div>
       </div><br>
       @empty
-      <h3>Aucune Offre pour l'instant... Soyez le premier ! </h3>
+      <h3>Aucune offre n'est disponible en télétravail</h3>
       @endforelse
     </div>
   </div>

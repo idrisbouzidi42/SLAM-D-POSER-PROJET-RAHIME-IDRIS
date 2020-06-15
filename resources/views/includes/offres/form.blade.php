@@ -164,8 +164,7 @@
 
             <select class="form-control @error('typeEntreprise') is-invalid @enderror" name="typeEntreprise">
                 @foreach ($offre->entreprise->getStatusOptions() as $key => $value)
-                <option value="{{ $key }}"
-                    {{ old("typeEntreprise") == $key ?? $offre->entreprise->typeEntreprise  == $key ? 'selected' : ''}}>
+                <option value="{{ $key }}" {{ $offre->entreprise->typeEntreprise  == $key ? 'selected' : ''}}>
                     {{ $value }}
                 </option>
                 @endforeach
