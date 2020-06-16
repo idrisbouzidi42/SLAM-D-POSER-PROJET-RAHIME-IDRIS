@@ -1,4 +1,5 @@
-@extends('admin.admin-layout')
+@extends('layouts.base-all')
+
 @section('content')
 <style>
     .tagtag {
@@ -21,7 +22,7 @@
         margin-bottom: 10px;
     }
 </style>
-@include('admin.admin-board')
+
 
 
 <!-- Search Demande -->
