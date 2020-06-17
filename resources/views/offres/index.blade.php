@@ -5,7 +5,7 @@
 <section id="list-annonces" class="section-padding  py-5">
   <div class="container">
     <div class="section-header text-center">
-      <h2 class="section-title">Recherche d'annonces stage</h2>
+      <h2 class="section-title">Rechercher dans les offres</h2>
     </div>
 
     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 search-content">

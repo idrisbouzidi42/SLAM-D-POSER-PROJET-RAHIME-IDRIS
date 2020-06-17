@@ -13,39 +13,6 @@ use Symfony\Component\Routing\Route;
 
 class OffreController extends Controller
 {
-
-    public function search()
-    {
-        $query = request('demande');
-        if ($query != '') {
-            $offres = Offre::where('nomOffre', 'LIKE', '%' . $query . '%')
-                ->orWhere('dureeOffre', 'LIKE', '%' . $query . '%')
-                ->orWhere('descriptionOffre', 'LIKE', '%' . $query . '%')
-                ->orWhere('teleTravailOffre', 'LIKE', '%' . $query . '%')
-                ->get();
-
-            $entreprises = Entreprise::where('nomEntreprise', 'LIKE', '%' . $query . '%')
-                ->orWhere('typeEntreprise', 'LIKE', '%' . $query . '%')
-                ->orWhere('telEntreprise', 'LIKE', '%' . $query . '%')
-                ->orWhere('adresseWebEntreprise', 'LIKE', '%' . $query . '%')
-                ->orWhere('nomTuteurEntreprise', 'LIKE', '%' . $query . '%')
-                ->orWhere('rueEntreprise', 'LIKE', '%' . $query . '%')
-                ->get();
-
-            $competences = Competence::where('nom', 'LIKE', '%' . $query . '%')->get();
-
-            if (count($offres) > 0 || count($competences) > 0 || count($entreprises) > 0) {
-                return view('showSearch', [
-                    'offres' => $offres,
-                    'competences' => $competences,
-                    'entreprises' => $entreprises
-                ])->withQuery($query);
-            }
-        }
-        return view('showSearch')->withMessage('No results for your query')->withQuery($query);
-    }
-
-
     public function index()
     {
         $offres = Offre::latest()->get();
@@ -63,7 +30,6 @@ class OffreController extends Controller
         $offre =  new Offre();
         $offre->entreprise = new Entreprise();
         $entreprise = new Entreprise();
-        //$choisi = explode(' , ',$offre->competencesOffre);
 
         return view('offres.create', [
             'entreprise' => $entreprise,

@@ -23,6 +23,7 @@ class SearchController extends Controller
                                 ->orWhere('descriptionOffre', 'LIKE', '%' .$query. '%')
                                 ->orWhere('teleTravailOffre', 'LIKE', '%' .$query. '%')
                                 ->get();
+                              
 
             $entreprises = Entreprise::where('nomEntreprise', 'LIKE', '%'. $query. '%')
                                 ->orWhere('typeEntreprise', 'LIKE', '%'. $query. '%')
@@ -31,11 +32,10 @@ class SearchController extends Controller
                                 ->orWhere('nomTuteurEntreprise', 'LIKE', '%' .$query. '%')
                                 ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
                                 ->get();
+
+            $offres->union($entreprises)->get();
    
             $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
-
-            //$testcompt = DB::table('competence_offre')->where('competence_name', 'LIKE', '%'.$query.'%')->get();
-            //dd($competences,$testcompt);
 
 
             if(count($offres) > 0 || count($competences) > 0 || count($entreprises) > 0 )
@@ -43,7 +43,7 @@ class SearchController extends Controller
                 return view('offres.searchShow', [
                     'offres' => $offres,
                     'competences' => $competences,
-                    'entreprises' => $entreprises
+                    'entreprises' => $entreprises,
                 ])->withQuery($query);
             }
         }
