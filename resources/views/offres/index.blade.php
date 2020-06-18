@@ -48,7 +48,7 @@
         </div>
       </div><br>
       @empty
-      <h3>Aucune offre n'est disponible en télétravail</h3>
+      <h3> {{$message}} </h3>
       @endforelse
     </div>
   </div>

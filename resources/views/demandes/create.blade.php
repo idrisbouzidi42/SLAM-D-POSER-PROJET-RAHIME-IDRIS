@@ -38,7 +38,6 @@
             <select name="teleTravailDemande" id="teleTravailDemande"
               class="form-control @error('teleTravailDemande') is-invalid @enderror"
               value="{{old('teleTravailDemande') ?? $demande->teleTravailDemande ?? ''}}">
-              <option value=""></option>
               <option {{ old('teleTravailDemande') == 'oui' ? 'selected' : ''}} value='oui'>Oui
               </option>
               <option {{ old('teleTravailDemande') == 'non' ? 'selected' : ''}} value='non'>Non
@@ -51,7 +50,7 @@
             @enderror
           </div>
 
-          <div class="row checkbox-offres">
+          <div class="row checkbox-offres ml-5">
             <legend class="fieldset-label">Vos compétences &nbsp;:</legend>
             @foreach ($competences as $comp)
             <div class="form-group-lg col-lg-6">

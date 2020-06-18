@@ -1,10 +1,10 @@
-@extends('admin.layouts.admin-layout')
+@extends('admin.layouts.sub-admin-layout')
 
 @section('content')
 
-<section id="list-annonces" class="section-padding container py-5">
-    <div class="container text-center">
-        <div class="section-header text-center mt-5">
+<section id="list-annonces" class="section-padding">
+    <div class="text-center ml-5">
+        <div class="section-header text-center">
             <h2 class="section-title">Recherche d'annonces stage</h2>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 search-content">
@@ -20,12 +20,11 @@
             </form>
         </div>
 
-        <div class="col-sm-10 py-5">
-
+        <div class="col-sm-10 py-5 ml-5">
             @if(isset($offres) && count($offres) > 0)
             <h2>Offres pour la recherche <strong>"{{$query}}"</strong></h2>
             @foreach($offres as $offre)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
 
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('offres.show', ['offre' => $offre->id]) }}">
@@ -56,7 +55,7 @@
             @if(isset($demandes) && count($demandes) > 0)
             <h2>Demandes pour la recherche <strong>"{{$query}}"</strong></h2>
             @foreach($demandes as $demande)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}">
                         <h4>{{ $demande->titreDemande }}</h4>
@@ -89,7 +88,7 @@
             <h2>Entreprises pour la recherche <strong>"{{$query}}"</strong></h2>
             @foreach($entreprises as $entreprise)
             @foreach ($entreprise->offres as $offre)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('offres.show', ['offre' => $offre->id]) }}">
                         <h4>{{ $offre->nomOffre }}</h4>
@@ -121,7 +120,7 @@
             <h2>Etudiants pour la recherche <strong>"{{$query}}"</strong></h2>
             @foreach($etudiants as $etudiant)
             @foreach ($etudiant->demandes as $demande)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}">
                         <h4>{{ $demande->titreDemande }}</h4>
@@ -153,11 +152,11 @@
 
             @if(isset($competences) && count($competences) > 0)
             @foreach($competences as $competence)
+            @if(count($competence->demandes) > 0 || count($competence->offres) > 0)
             @if (count($competence->demandes) > 0)
-            <h2>Compétences liés aux demandes pour la recherche <strong>"{{$query}}"</strong></h2>
-            @endif
+            <h2>Demandes liées à la compétence <strong>"{{$query}}"</strong></h2>
             @forelse ($competence->demandes as $demande)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}">
                         <h4>{{ $demande->titreDemande }}</h4>
@@ -182,14 +181,13 @@
                 </div>
             </div><br>
             @empty
-            <?php $commpVide = true; ?>
-
             @endforelse
-            @if (count($competence->offres) > 0)
-            <h2>Compétences liés aux offres pour la recherche <strong>"{{$query}}"</strong></h2>
             @endif
+
+            @if (count($competence->offres) > 0)
+            <h2>Offres liées à la compétence <strong>"{{$query}}"</strong></h2>
             @forelse ($competence->offres as $offre)
-            <div class="row annonces-content">
+            <div class="row annonces-content mb-5">
                 <div class="col-lg-6 left-annonces">
                     <a href="{{ route('offres.show', ['offre' => $offre->id]) }}">
                         <h4>{{ $offre->nomOffre }}</h4>
@@ -212,12 +210,23 @@
                 </div>
             </div><br>
             @empty
-            <?php $commpVide = true; ?>
             @endforelse
+            @endif
+            @else
+            <div class="h3 text-center">{{ $message }}</div>
+            @endif
             @endforeach
             @endif
 
+
+            @if(!isset($offres) && !isset($demandes) && !isset($entreprises) && !isset($etudiants) && !isset($users) )
+            <div class="h3 text-center">
+                {{ $message }}
+            </div>
+            @endif
+
         </div>
+    </div>
 </section>
 @endsection
 <!--

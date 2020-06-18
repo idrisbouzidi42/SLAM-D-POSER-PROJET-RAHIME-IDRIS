@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<h1> Éditer Profl Admin de {{Auth::user()->name}}</h1>
+<h1> Éditer Profil Admin de {{Auth::user()->name}}</h1>
 <table class="table">
     <tr>
         <td>Nom : {{Auth::user()->name}}</td>

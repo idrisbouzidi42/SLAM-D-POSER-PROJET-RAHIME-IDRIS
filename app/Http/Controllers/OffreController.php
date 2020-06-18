@@ -15,7 +15,7 @@ class OffreController extends Controller
 {
     public function index()
     {
-        $offres = Offre::latest()->get();
+        $offres = Offre::latest()->etat();
         if (count($offres) > 0) {
             return view('offres.index', compact('offres'));
         }

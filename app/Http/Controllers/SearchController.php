@@ -33,7 +33,6 @@ class SearchController extends Controller
                                 ->orWhere('rueEntreprise', 'LIKE', '%' .$query. '%')
                                 ->get();
 
-            $offres->union($entreprises)->get();
    
             $competences = Competence::where('nom', 'LIKE', '%'.$query.'%')->get();
 
@@ -44,7 +43,7 @@ class SearchController extends Controller
                     'offres' => $offres,
                     'competences' => $competences,
                     'entreprises' => $entreprises,
-                ])->withQuery($query);
+                ])->withQuery($query)->withMessage('Aucun résultat trouvé dans les offres...');
             }
         }
         return view('offres.searchShow')->withMessage('Aucun résultat trouvé dans les offres...')->withQuery($query);
@@ -80,7 +79,7 @@ class SearchController extends Controller
                 'demandes' => $demandes,
                 'etudiants' => $etudiants,
                 'competences' => $competences
-            ])->withQuery($query);
+            ])->withQuery($query)->withMessage('Aucun résultat trouvé dans les demandes...');
         }
         return view('demandes.searchShow')->withMessage('Aucun résultat trouvé dans les demandes...')->withQuery($query);
     }
@@ -136,7 +135,7 @@ class SearchController extends Controller
                 'etudiants' => $etudiants,
                 'entreprises' => $entreprises,
                 'users' => $users
-            ])->withQuery($query);
+            ])->withQuery($query)->withMessage('Aucun résultat trouvé du tout...');
         }
         return view('admin.searchShow')->withMessage('Aucun résultat trouvé du tout...')->withQuery($query);
     }

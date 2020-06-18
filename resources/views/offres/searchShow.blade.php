@@ -21,7 +21,6 @@
         </div>
 
         <div class="col-sm-12 py-5">
-            <h1>Offres trouvée pour la recherche "{{$query}}" </h1>
             @if(isset($offres) && count($offres) > 0)
             @forelse($offres as $offre)
             <div class="row annonces-content">
@@ -34,13 +33,11 @@
                     <p>{{ substr($offre->descriptionOffre,0,200).'...' }}</p>
                     <p><b>{{ $offre->created_at->diffForHumans() }}</b></p>
                 </div>
-
                 <div class="col-lg-5 center-annonces">
                     @foreach ($offre->competences as $competence)
                     <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
                     @endforeach
                 </div>
-
                 <div class="col-lg-1 right-annonces">
                     <a href="{{ url('/search/offres/teletravail') }}">
                         {{ $offre->teleTravailOffre == 'oui' ? 'Télétravail possible' : '' }}
@@ -64,13 +61,11 @@
                     <p>{{ substr($offre->descriptionOffre,0,200).'...' }}</p>
                     <p><b>{{ $offre->created_at->diffForHumans() }}</b></p>
                 </div>
-
                 <div class="col-lg-5 center-annonces">
                     @foreach ($offre->competences as $competence)
                     <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
                     @endforeach
                 </div>
-
                 <div class="col-lg-1 right-annonces">
                     <a href="{{ url('/search/offres/teletravail') }}">
                         {{ $offre->teleTravailOffre == 'oui' ? 'Télétravail possible' : '' }}
@@ -96,13 +91,11 @@
                     <p>{{ substr($offre->descriptionOffre,0,200).'...' }}</p>
                     <p><b>{{ $offre->created_at->diffForHumans() }}</b></p>
                 </div>
-
                 <div class="col-lg-5 center-annonces">
                     @foreach ($offre->competences as $competence)
                     <a href="{{ url('/search/'. $competence->nom) }}">{{$competence->nom}}</a>
                     @endforeach
                 </div>
-
                 <div class="col-lg-1 right-annonces">
                     <a href="{{ url('/search/offres/teletravail') }}">
                         {{ $offre->teleTravailOffre == 'oui' ? 'Télétravail possible' : '' }}
@@ -110,19 +103,17 @@
                 </div>
             </div><br>
             @empty
-
+            <div class="h3 text-center">{{ $message }}</div>
             @endforelse
             @endforeach
             @endif
 
-
-
+            @if(!isset($offres) && !isset($entreprises))
+            <div class="h3 text-center">
+                {{ $message }}
+            </div>
+            @endif
         </div>
-
-
-        @if(!isset($offres) && $compVide == true && !isset($entreprises))
-        <h1>{{$message}}</h1>
-        @endif
     </div>
 
 </section>

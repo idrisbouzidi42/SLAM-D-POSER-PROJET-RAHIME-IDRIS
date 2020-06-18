@@ -53,7 +53,6 @@
                         <label for="teleTravailOffre">Télétravail possible ?</label>
                         <select name="teleTravailOffre" id="teleTravailOffre"
                             class="form-control @error('teleTravailOffre') is-invalid @enderror">
-                            <option value=""></option>
                             <option {{ old('teleTravailOffre') == 'oui' ? 'selected' : '' }} value=oui>
                                 Oui
                             </option>

@@ -12,7 +12,7 @@ class DemandeController extends Controller
     public function index()
     {
         //$demandesEtat = Demande::etatDemande(); // probleme ici car si tu signal bah erreur dans la page
-        $demandes = Demande::latest()->get();
+        $demandes = Demande::latest()->etatDemande();
         if (count($demandes) > 0) {
             return view('demandes.index', compact('demandes'));
         } else {
