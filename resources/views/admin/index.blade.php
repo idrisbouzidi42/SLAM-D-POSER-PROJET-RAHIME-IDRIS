@@ -185,7 +185,7 @@
                                                     class="btn btn-secondary m-2" style=" margin-right:5px;">Editer</a>
                                                 <a class="btn btn-warning m-2" id="{{$demande->id}}"
                                                     href="{{ url("admin/signal/demandes/{$demande->id}") }}">Signaler</a>
-                                                <form method="POST" action="{{ url("admin/demandes/{$demande->id}") }}"
+                                                <form method="POST" action="{{ url("demandes/{$demande->id}") }}"
                                                     style="margin: 0px">
                                                     @csrf
                                                     @method('DELETE')

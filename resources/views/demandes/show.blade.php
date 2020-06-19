@@ -53,8 +53,9 @@
                     <div class="p-3 mb-3 bg-light rounded">
                         <h5>{{$demande->etudiant->nomEtudiant}}</h5>
                         <p>{{$demande->etudiant->villeEtudiant . '(' . $demande->etudiant->regionEtudiant . ')'}}<br>
-                            <i class="fa fa-file-pdf-o"></i><a href="{{$demande->etudiant->cvEtudiant}}">Télécharger le
-                                CV</a></p>
+                            <i class="fa fa-file-pdf-o"></i>
+                            <a href="{{ asset('uploads/cv/' . $demande->etudiant->cvEtudiant) }}"
+                                title="Pdf">Télécharger le CV</a></p>
                     </div>
 
                     <div class="p-3 mb-3 bg-light rounded">

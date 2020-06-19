@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:t9qZqLq/tsRk0ujZRaxOdkpa+J6TV6ETolDyhN9C1fY=',
+    'key' => 'base64:5R5wSR0u41X2/Ruitz9vmnhdzdcxPBBe4rBATqMF/3A=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -177,7 +177,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/html/coderahime/storage/framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -266,7 +266,7 @@
         'port' => '3306',
         'database' => 'depotstage',
         'username' => 'root',
-        'password' => 'toor',
+        'password' => '',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -286,7 +286,7 @@
         'port' => '3306',
         'database' => 'depotstage',
         'username' => 'root',
-        'password' => 'toor',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -301,7 +301,7 @@
         'port' => '3306',
         'database' => 'depotstage',
         'username' => 'root',
-        'password' => 'toor',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -343,12 +343,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/coderahime/storage/app',
+        'root' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/coderahime/storage/app/public',
+        'root' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -365,7 +365,7 @@
     ),
     'links' => 
     array (
-      '/var/www/html/coderahime/public/storage' => '/var/www/html/coderahime/storage/app/public',
+      'C:\\xampp\\htdocs\\projetdepot\\public\\storage' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -399,13 +399,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/html/coderahime/storage/logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/html/coderahime/storage/logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -455,7 +455,7 @@
       ),
       'emergency' => 
       array (
-        'path' => '/var/www/html/coderahime/storage/logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -512,7 +512,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/html/coderahime/resources/views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\projetdepot\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -591,7 +591,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/html/coderahime/storage/framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -692,9 +692,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/html/coderahime/resources/views',
+      0 => 'C:\\xampp\\htdocs\\projetdepot\\resources\\views',
     ),
-    'compiled' => '/var/www/html/coderahime/storage/framework/views',
+    'compiled' => 'C:\\xampp\\htdocs\\projetdepot\\storage\\framework\\views',
   ),
   'flare' => 
   array (

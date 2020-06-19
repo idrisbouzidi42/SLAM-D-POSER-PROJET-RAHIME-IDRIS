@@ -17,7 +17,7 @@ class CreateEtudiantsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nomEtudiant');
             $table->text('presentationEtudiant');
-            $table->string('cvEtudiant');
+            $table->string('cvEtudiant')->nullable();
             $table->string('regionEtudiant');
             $table->string('villeEtudiant');
             $table->string('telEtudiant');

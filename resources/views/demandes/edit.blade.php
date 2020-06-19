@@ -142,7 +142,7 @@
           <div class="upload-file">
             <div id="addcv-preview" class="upload-preview"></div>
             <input type="file" name="cvEtudiant" id="addcv" class="form-control upload-to-preview visuallyhidden"
-              value="{{ old('cvEtudiant') ?? $demande->etudiant->cvEtudiant ?? '' }}">
+              value="{{ $demande->etudiant->cvEtudiant}}">
             <label for="cvcv" class="upload awesome blue small"><i aria-hidden="true"
                 class="icon icon-upload-cloud"></i></label>
           </div>
