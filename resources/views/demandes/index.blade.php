@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="col-sm-12 py-5">
-            <h1>Demande de stage</h1>
+            <h1>Les dernières Demande de stage</h1>
 
             @if(isset($demandes))
             @foreach($demandes as $demande)

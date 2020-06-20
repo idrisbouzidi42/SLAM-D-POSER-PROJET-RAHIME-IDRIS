@@ -72,7 +72,7 @@
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="nom">Nom</label>
+                            <label for="nom">Nom<span class="require-form">*</span></label>
                             <input class="form-control @error('nom') is-invalid @enderror" type="text" name="nom"
                                 id="nom">
                             @error('nom')
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="email">Email</label>
+                            <label for="email">Email<span class="require-form">*</span></label>
                             <input class="form-control @error('email') is-invalid @enderror" type="text" name="email"
                                 id="email">
                             @error('email')
@@ -96,7 +96,7 @@
 
 
                     <div class="form-group">
-                        <label for="message">Message</label>
+                        <label for="message">Message<span class="require-form">*</span></label>
                         <textarea class="form-control @error('message') is-invalid @enderror" name="message"
                             id="message" cols="30" rows="10"></textarea>
                         @error('message')

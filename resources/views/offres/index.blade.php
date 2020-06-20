@@ -21,7 +21,7 @@
       </form>
     </div>
     <div class="col-sm-12 py-5">
-      <h1>Offres de stage</h1>
+      <h1>Les dernières offres de stage</h1>
       @forelse($offres as $offre)
 
       <div class="row annonces-content">
