@@ -1,3 +1,5 @@
+@section('title', 'DEPOT PROJET - Lycée Simone Weil - Saint-Priest-en-Jarez')
+
 @extends('layouts.base')
 
 @section('content')
