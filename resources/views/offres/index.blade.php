@@ -1,4 +1,8 @@
+@section('title', 'DEPOT PROJET - Listes des offres')
+
 @extends('layouts.base-all')
+
+@section('pages-title', 'Liste des offres de stage')
 
 @section('content')
 

@@ -20,19 +20,23 @@
                             <li><a href="{{ url('/') }}">Accueil</a></li>
                             <li><a href="{{ url('offres/index') }}">Les offres</a></li>
                             <li><a href="{{ url('demandes/index') }}">Les demandes</a></li>
-                            <li><a href="{{ route('offres.create') }}">Poster une offre</a></li>
-                            <li><a href="{{ route('demandes.create') }}">Poster une demande</a></li>
                             <li><a href="{{ url('contact') }}">Contact</a></li>
                         </ul>
+                        <ul>
+                            <li><a href="{{ route('offres.create') }}">Poster une offre</a></li>
+                            <li><a href="{{ route('demandes.create') }}">Poster une demande</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sub-two-right col-lg-4 col-md-6 mt-lg-0 mt-md-5">
+                    <h6>Légales</h6>
+                    <div class="footer-hny-ul">
                         <ul>
                             <li><a href="#">Mentions Légales</a></li>
                             <li><a href="#">Politique de confidentialité</a></li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="sub-one-left col-lg-4 col-md-6 mt-lg-0 mt-md-5">
-                    <h6>Lorem ipsum</h6>
                 </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
+@section('title', 'DEPOT PROJET - ' . $offre->nomOffre)
+
 @extends('layouts.base-all')
 
+@section('pages-title', $offre->nomOffre)
+
 @section('content')
-
-
-
 
 <section id="annonce-main">
     <div class="annonce-bg py-5">

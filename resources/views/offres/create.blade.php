@@ -1,10 +1,19 @@
+@section('title', 'DEPOT PROJET - Poster une offre')
+
 @extends('layouts.base-all')
 
+
+@section('pages-title', 'Soumettre une offre de stage')
 @section('content')
 
 <div id="all-annonces">
     <div class="container py-5">
-        <h1>Soumettre une offre de stage</h1>
+        <h1>Proposez une offre de stage</h1>
+        <p class="rules-form">
+            Indiquez le type de contrat, les modalités d'embauche, les compétences recherchées… La
+            rédaction de
+            l'annonce en
+            français est obligatoire.</p>
         <div class="annonces-form">
             <form method="POST" action="{{ route('offres.create') }}">
                 @csrf
@@ -48,7 +57,7 @@
                             {{$errors->first('descriptionOffre')}}
                         </div>
                         @enderror
-                        <p class="rules-textarea">
+                        <p class="rules-form">
                             Pensez à donner le maximum d'informations : type de missions,
                             environnement,
                             salaire prévu, modalités de réponse pour les postulants, temps complet ou temps partiel.</p>

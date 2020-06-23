@@ -1,8 +1,9 @@
+@section('title', 'DEPOT PROJET - Éditer - ' . $offre->nomOffre)
+
 @extends('admin.layouts.sub-admin-layout')
 
-@section('title-page')
-Éditer offre
-@endsection
+@section('pages-title', 'Éditer l\'offre ' . $offre->nomOffre)
+
 @section('content')
 <div class="all-offres">
     <h2 class="form-edit-title">Modifier une offre de stage</h2>

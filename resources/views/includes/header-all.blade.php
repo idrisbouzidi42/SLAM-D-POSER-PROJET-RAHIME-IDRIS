@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-container">
-                        <h1>Page </h1>
+                        <h1>@yield('pages-title')</h1>
                         <a href="#" class="target-scroll"><i class="fa fa-chevron-down"></i></a>
                     </div>
                 </div>

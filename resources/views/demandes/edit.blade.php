@@ -1,8 +1,9 @@
+@section('title', 'DEPOT PROJET - Éditer - ' . $demande->titreDemande)
+
 @extends('admin.layouts.sub-admin-layout')
 
-@section('title-page')
-Éditer demande
-@endsection
+@section('pages-title', 'Éditer la demande ' . $demande->titreDemande)
+
 
 @section('content')
 <div class="all-offres">

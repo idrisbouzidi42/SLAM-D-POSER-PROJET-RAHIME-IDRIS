@@ -1,7 +1,11 @@
+@section('title', 'DEPOT PROJET - Contact')
+
 @extends('layouts.base-all')
 
-@section('content')
 
+@section('pages-title', 'Soumettre une demandes de stage')
+
+@section('content')
 
 @if(!session()->has('message'))
 <section class="contact-main">

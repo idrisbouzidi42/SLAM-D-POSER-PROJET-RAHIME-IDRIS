@@ -1,6 +1,11 @@
+@section('title', 'DEPOT PROJET - Rechercher des demandes')
+
 @extends('layouts.base-all')
 
+@section('pages-title', 'rechercher une demande')
+
 @section('content')
+
 <section id="list-annonces" class="section-padding  py-5">
     <div class="container">
         <div class="section-header text-center">

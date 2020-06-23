@@ -1,10 +1,17 @@
+@section('title', 'DEPOT PROJET - Poster une demande')
+
 @extends('layouts.base-all')
+
+@section('pages-title', 'Soumettre une demandes de stage')
 
 @section('content')
 
 <div id="all-annonces">
   <div class="container py-5">
-    <h1>Soumettre une demande de stage</h1>
+    <h1>Proposez une demande de stage</h1>
+    <p class="rules-form">
+      Précisez ici votre demande, vos compétences, votre présentation, votre CV…
+    </p>
     <form action="{{ route('demandes.create') }}" method="post" class="form-edit" enctype="multipart/form-data">
       @csrf
       <div class="row annonces-form">
