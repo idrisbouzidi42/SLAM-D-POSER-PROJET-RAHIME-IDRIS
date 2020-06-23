@@ -600,6 +600,22 @@ h3.title{
     line-height: 30px;
   }
 }
+
+/* pages errors */
+.pages-errors {
+    background-color: #e9fcff;
+ 
+}
+.pages-errors .error-content{
+    margin: 10% 25%;
+    padding: 0;
+}
+  
+.pages-errors .error-content a{
+   font-size: 2rem;
+   margin: 0 25%;
+}
+
 /* Footer */
 .footer .footer-hny {
     background: #101d29;
